@@ -9,6 +9,6 @@ datasource db {
 
 model User {
   id    Int     @id @unique @default(autoincrement())
-  email String  @unique
-  name  String?
+  name  String? @db.VarChar(10)
+  email String? @db.VarChar(50)
 }
