@@ -26,9 +26,19 @@ const updateCloset = async (productId: number, productName?: string, size?: stri
     return data;
 }
 
+//* 전체 옷장 의류 정보 삭제
+const deleteCloset = async (productId: number) => {
+    await prisma.allCloset.delete({
+      where: {
+        id: productId  
+      }
+    });
+}
+
 const closetService = {
     getAllCloset,
     updateCloset,
+    deleteCloset,
 };
 
 export default closetService;
