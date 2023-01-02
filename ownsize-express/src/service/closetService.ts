@@ -35,11 +35,12 @@ const deleteCloset = async (productId: number) => {
     });
 }
 
+
 const closetService = {
     getAllCloset,
     updateCloset,
     deleteCloset,
-    
+
 };
 
 export default closetService;
