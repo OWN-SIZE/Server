@@ -28,9 +28,18 @@ const updateCloset = async (req: Request, res: Response) => {
   return res.status(sc.CREATED).send(success(sc.CREATED, rm.UPDATE_ALLCLOSET_SUCCESS, data));
 }
 
+const deleteCloset = async (req: Request, res: Response) => {
+  const { productId } = req.params;
+
+  await closetService.deleteCloset(+productId);
+
+  return res.status(sc.OK).send(success(sc.OK, rm.DELETE_ALLCLOSET_SUCCESS));
+}
+
 const closetController = {
   getAllCloset,
-  updateCloset
+  updateCloset,
+  deleteCloset,
 };
 
 export default closetController;
