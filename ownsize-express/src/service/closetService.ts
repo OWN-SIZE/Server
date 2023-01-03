@@ -7,7 +7,7 @@ const getAllCloset = async () => {
     return data;
 };
 
-//* 전체 옷장 정보 수정
+//* 전체 옷장 의류 정보 수정
 const updateCloset = async (productId: number, productName?: string, size?: string, memo?: string, isPin?: boolean) => {
     const data = await prisma.allCloset.update({
         where: {
@@ -37,6 +37,7 @@ const closetService = {
     getAllCloset,
     updateCloset,
     deleteCloset,
+
 };
 
 export default closetService;
