@@ -8,22 +8,20 @@ datasource db {
 }
 
 model User {
-  id         Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
-  name       String?     @db.VarChar(10)
-  email      String?     @db.VarChar(50)
-  AllCloset  AllCloset[]
-  BottomSize BottomSize?
-  TopSize    TopSize?
+  id        Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
+  name      String?     @db.VarChar(10)
+  email     String?     @db.VarChar(50)
+  AllCloset AllCloset[]
 }
 
 model AllCloset {
   id          Int      @id(map: "Archive_pkey") @unique(map: "Archive_id_key") @default(autoincrement())
   userId      Int      @default(autoincrement())
   image       String?  @db.VarChar(500)
-  productName String?  @db.VarChar(20)
+  productName String?  @db.VarChar(36)
   size        String?  @db.VarChar(10)
   link        String?  @db.VarChar(200)
-  memo        String?  @db.VarChar(500)
+  memo        String?  @db.VarChar(50)
   isRecommend Boolean?
   isPin       Boolean?
   mallName    String?  @db.VarChar(50)
@@ -47,21 +45,19 @@ model AllSizeTop {
   chest    Int?
 }
 
-model BottomSize {
-  id     Int  @id @unique @default(autoincrement())
-  userId Int  @unique @default(autoincrement())
-  length Int?
-  waist  Int?
-  thigh  Int?
-  rise   Int?
-  User   User @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "bottomsize_user_id_fk")
-}
+/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
+// model Category {
+// }
 
-model TopSize {
-  id       Int  @id @unique @default(autoincrement())
-  userId   Int  @unique @default(autoincrement())
-  length   Int?
-  shoulder Int?
-  chest    Int?
-  User     User @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "topsize_user_id_fk")
+model MySize {
+  id           Int  @id @unique @default(autoincrement())
+  userId       Int  @default(autoincrement())
+  topLength    Int?
+  shoulder     Int?
+  chest        Int?
+  bottomLength Int?
+  waist        Int?
+  thigh        Int?
+  rise         Int?
+  hem          Int?
 }
