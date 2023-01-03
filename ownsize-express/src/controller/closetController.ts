@@ -37,7 +37,7 @@ const deleteCloset = async (req: Request, res: Response) => {
 }
 
 const closetController = {
-  getAllClosetById,
+  getAllCloset,
   updateCloset,
   deleteCloset,
 };
