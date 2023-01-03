@@ -45,10 +45,6 @@ model AllSizeTop {
   chest    Int?
 }
 
-/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
-// model Category {
-// }
-
 model MySize {
   id           Int  @id @unique @default(autoincrement())
   userId       Int  @default(autoincrement())
@@ -61,3 +57,7 @@ model MySize {
   rise         Int?
   hem          Int?
 }
+
+/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
+// model Category {
+// }
