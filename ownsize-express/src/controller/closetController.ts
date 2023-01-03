@@ -4,9 +4,14 @@ import { rm, sc } from "../constants";
 import { success, fail } from "../constants/response";
 
 //* 전체 옷장 조회
-const getAllCloset = async (req: Request, res: Response) => {
-  const data = await closetService.getAllCloset();
+const getAllClosetById = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  
+  const data = await closetService.getAllClosetById(+userId);
 
+  if (!data) {
+    return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.READ_ALLCLOSET_FAIL));
+  }
   return res.status(sc.OK).send(success(sc.OK, rm.READ_ALLCLOSET_SUCCESS, data));
 }
 
@@ -37,7 +42,7 @@ const deleteCloset = async (req: Request, res: Response) => {
 }
 
 const closetController = {
-  getAllCloset,
+  getAllClosetById,
   updateCloset,
   deleteCloset,
 };

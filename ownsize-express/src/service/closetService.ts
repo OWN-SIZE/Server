@@ -1,10 +1,13 @@
 import { PrismaClient } from "@prisma/client";
-import { serialize } from "v8";
 const prisma = new PrismaClient();
 
 //* 전체 옷장 조회
-const getAllCloset = async () => {
-    const data = await prisma.allCloset.findMany();
+const getAllClosetById = async (userId: number) => {
+    const data = await prisma.allCloset.findMany({
+        where: {
+            userId: userId
+        }
+    });
   
     return data;
 };
@@ -36,7 +39,7 @@ const deleteCloset = async (productId: number) => {
 }
 
 const closetService = {
-    getAllCloset,
+    getAllClosetById,
     updateCloset,
     deleteCloset,
 };
