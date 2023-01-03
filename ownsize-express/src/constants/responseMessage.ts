@@ -30,8 +30,8 @@ export default {
     // 전체 옷장
     READ_ALLCLOSET_SUCCESS: "전체 옷장 조회 성공",
     READ_ALLCLOSET_FAIL: "전체 옷장 조회 성공",
-    UPDATE_ALLCLOSET_SUCCESS: "전체 옷장 의류 정보 수정 성공",
-    UPDATE_ALLCLOSET_FAIL: "전체 옷장 의류 정보 수정 실패",
+    UPDATE_ALLCLOSET_SUCCESS: "전체 옷장 내 의류 정보 수정 성공",
+    UPDATE_ALLCLOSET_FAIL: "전체 옷장 내 의류 정보 수정 실패",
     ALLCLOSET_INFO_ERROR: "업데이트할 정보 확인하세요",
     DELETE_ALLCLOSET_SUCCESS: "전체 옷장 의류 정보 삭제 성공",
 

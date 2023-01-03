@@ -10,7 +10,7 @@ const getAllCloset = async (req: Request, res: Response) => {
   return res.status(sc.OK).send(success(sc.OK, rm.READ_ALLCLOSET_SUCCESS, data));
 }
 
-//* 전체 옷장 의류 정보 수정
+//* 전체 옷장 내 의류 정보 수정
 const updateCloset = async (req: Request, res: Response) => {
   const { productName, size, memo, isPin } = req.body;
   const { productId } = req.params;
@@ -28,7 +28,7 @@ const updateCloset = async (req: Request, res: Response) => {
   return res.status(sc.CREATED).send(success(sc.CREATED, rm.UPDATE_ALLCLOSET_SUCCESS, data));
 }
 
-//* 전체 옷장 의류 정보 삭제
+//* 전체 옷장 내 의류 정보 삭제
 const deleteCloset = async (req: Request, res: Response) => {
   const { productId } = req.params;
 
