@@ -72,7 +72,7 @@
 
 <br/>
 
-### ERD (수정)
+### ERD (수정중)
 ![diagram](https://user-images.githubusercontent.com/87058086/210496676-54e17fcd-cc64-4a32-9311-a2e0b5bc5622.png)
 
 
