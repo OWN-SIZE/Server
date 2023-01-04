@@ -13,7 +13,7 @@ const getMySize = async () => {
 const inputTopSize = async (
   topLength: number,
   shoulder: number,
-  chest: String
+  chest: number
 ) => {
   const data = await prisma.mySize.create({
     data: {

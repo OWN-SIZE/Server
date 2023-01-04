@@ -7,6 +7,6 @@ const router: Router = Router();
 
 router.use("/user", userRouter);
 router.use("/allCloset", closetRouter);
-router.use("/mysize", sizeRouter);
+router.use("/mySize", sizeRouter);
 
 export default router;

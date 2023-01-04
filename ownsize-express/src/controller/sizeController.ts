@@ -13,9 +13,8 @@ const getMySize = async (req: Request, res: Response) => {
 //* 내 상의 사이즈 정보 입력
 const inputTopSize = async (req: Request, res: Response) => {
   const { topLength, shoulder, chest } = req.body;
-  var chest1 = chest + "#";
 
-  const data = await sizeService.inputTopSize(+topLength, +shoulder, chest1);
+  const data = await sizeService.inputTopSize(+topLength, +shoulder, +chest);
 
   if (!data) {
     return res
@@ -24,7 +23,7 @@ const inputTopSize = async (req: Request, res: Response) => {
   }
   return res
     .status(sc.OK)
-    .send(success(sc.OK, rm.INSERT_MYTOPSIZE_SUCCESS, data)); //바꿔야함
+    .send(success(sc.OK, rm.INSERT_MYTOPSIZE_SUCCESS, data)); // 바꿔야함
 };
 
 const sizeController = {
