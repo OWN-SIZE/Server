@@ -18,17 +18,40 @@ const inputTopSize = async (req: Request, res: Response) => {
 
   if (!data) {
     return res
-      .status(sc.OK)
-      .send(success(sc.OK, rm.INSERT_MYTOPSIZE_SUCCESS, data));
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.INSERT_MYTOPSIZE_FAIL));
   }
   return res
     .status(sc.OK)
-    .send(success(sc.OK, rm.INSERT_MYTOPSIZE_SUCCESS, data)); // 바꿔야함
+    .send(success(sc.OK, rm.INSERT_MYTOPSIZE_SUCCESS, data));
+};
+
+//* 내 하의 사이즈 정보 입력
+const inputBottomSize = async (req: Request, res: Response) => {
+  const { bottomLength, waist, thigh, rise, hem } = req.body;
+
+  const data = await sizeService.inputBottomSize(
+    +bottomLength,
+    +waist,
+    +thigh,
+    +rise,
+    +hem
+  );
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.INSERT_MYBOTTOMSIZE_FAIL));
+  }
+  return res
+    .status(sc.OK)
+    .send(success(sc.OK, rm.INSERT_MYBOTTOMSIZE_SUCCESS, data));
 };
 
 const sizeController = {
   getMySize,
   inputTopSize,
+  inputBottomSize,
 };
 
 export default sizeController;

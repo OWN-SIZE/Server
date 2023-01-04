@@ -38,7 +38,9 @@ export default {
   // 마이 사이즈
   READ_MYSIZE_SUCCESS: "마이사이즈 조회 성공",
   INSERT_MYTOPSIZE_SUCCESS: "내 상의 사이즈 정보 입력 성공",
+  INSERT_MYTOPSIZE_FAIL: "내 상의 사이즈 정보 입력 실패",
   INSERT_MYBOTTOMSIZE_SUCCESS: "내 하의 사이즈 정보 입력 성공",
+  INSERT_MYBOTTOMSIZE_FAIL: "내 하의 사이즈 정보 입력 실패",
 
   // 서버 내 오류
   INTERNAL_SERVER_ERROR: "서버 내 오류",

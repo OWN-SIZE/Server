@@ -9,4 +9,7 @@ router.get("/", sizeController.getMySize);
 //* 내 상의 사이즈 정보 입력 POST /mySize/topSize
 router.post("/topSize", sizeController.inputTopSize);
 
+//* 내 하의 사이즈 정보 입력 POST /mySize/bottomSize
+router.post("/bottomSize", sizeController.inputBottomSize);
+
 export default router;

@@ -26,9 +26,31 @@ const inputTopSize = async (
   return data;
 };
 
+//* 내 하의 사이즈 정보 입력
+const inputBottomSize = async (
+  bottomLength: number,
+  waist: number,
+  thigh: number,
+  rise: number,
+  hem: number
+) => {
+  const data = await prisma.mySize.create({
+    data: {
+      bottomLength,
+      waist,
+      thigh,
+      rise,
+      hem,
+    },
+  });
+
+  return data;
+};
+
 const sizeService = {
   getMySize,
   inputTopSize,
+  inputBottomSize,
 };
 
 export default sizeService;
