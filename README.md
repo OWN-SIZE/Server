@@ -4,6 +4,7 @@
 🔔 서비스 한줄소개 : 사이즈 실측 입력을 바탕으로 온라인 쇼핑몰에서 사이즈를 추천하고 의류 정보 아카이빙을 제공한다
 
 🔔 서비스 가치제안 : 
+
 🔔 서비스 문제정의 : 
 
 🔔 서비스 타겟정의 : 
@@ -18,7 +19,7 @@
 <br/>
 
 ### 👥 Contributors
-|김동재||
+|김동재| |조하얀|
 
 
 <br/>
@@ -28,37 +29,51 @@
 | :---: | :---: | :---: | :---: |
 
 |소셜 로그인|[POST] /auth/login|`조하얀`| |
+
 |회원가입|[POST] /auth/register|`조하얀`| |
 
 |전체 옷장 조회|[GET] /allCloset|`김동재`| o |
+
 |전체 옷장 의류 정보 수정|[PUT] /allCloset/:productId|`김동재`| o |
+
 |전체 옷장 의류 삭제|[DELETE] /allCloset/:productId|`김동재`| o |
 
 |카테고리 전체 조회|[GET] /category|`김동재`| o |
+
 |카테고리 생성|[POST] /category/plusCategory|`김동재`| o |
+
 |카테고리 삭제|[DELETE] /category/:categoryId|`김동재`| |
+
 |카테고리 상세 조회|[GET] /category/:categoryId|`김동재`| |
+
 |카테고리 내 의류 정보 수정|[PUT] /category/:categoryId/:inClothId|`김동재`| |
+
 |카테고리 내 의류 삭제|[DELETE] /category/:categoryId/:inClothId|`김동재`| |
 
 |마이사이즈 조회|[GET] /mysize|'조하얀'| |
+
 |내 상의 사이즈 정보 입력|[POST] /mysize/topSize|'조하얀'| o |
+
 |내 하의 사이즈 정보 입력|[POST] /mysize/bottomSize|'조하얀'| |
 
 |마이페이지 조회|[GET] /mypage|'조하얀`| |
+
 |사이즈 추천 기록 조회|[GET] /mypage|`조하얀`| |
 
 |현재 옷 종류 선택|[PUT] /extension/:userId/topOrBottom|'김동재'| |
+
 |사이즈 비교 결과 조회|[GET] /extension/bestSize|'김동재'| |
+
 |전체 옷장에 저장|[POST] /extesion/plusCloset|'김동재'| |
+
 |비교 사이즈 수동 입력|[POST] /extension/inputSize|'김동재'| |
 
 
 
 <br/>
 
-### ERD
-![drawSQL-export-2022-11-20_04_28](https://user-images.githubusercontent.com/102947253/202871790-f58e3fa4-23fa-441c-a3b8-657b3dcf9f74.png)
+### ERD (수정)
+![diagram](https://user-images.githubusercontent.com/87058086/210496676-54e17fcd-cc64-4a32-9311-a2e0b5bc5622.png)
 
 
 
