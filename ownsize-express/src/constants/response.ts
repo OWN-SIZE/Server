@@ -24,29 +24,6 @@ export const success2 = (status: number, message: string, data?: any) => {
     }
   });
 
-  const topData = {
-    top,
-  };
-  const bottomData = {
-    bottom,
-  };
-  //console.log("top: ", topData);
-
-  /* split
-  const dataStr = JSON.stringify(data);
-
-  const arr = dataStr.split("#");
-
-  let data1 = arr[0] + '"}';
-  data1 = data1.substring(1);
-  console.log(data1);
-
-  data1 = JSON.parse(data1);
-
-  //const data2 = JSON.parse(arr[1]);
-
-  */
-
   return {
     status,
     success: true,
