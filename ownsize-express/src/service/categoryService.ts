@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { arrayBuffer } from "stream/consumers";
 const prisma = new PrismaClient();
 
 //* 카테고리 전체 조회
@@ -39,12 +40,19 @@ const getCategoryById = async (categoryId: number) => {
         },
         select: {
             allClosetId: true
+
         }
     })
 
+    const allClosetArr = [];
+
+    for (var i = 0; i < AllClosetId.length; i++){
+       allClosetArr.push(Object.values(AllClosetId[i])[0])
+    }
+    
     const data = await prisma.allCloset.findMany({
         where: {
-            id: Object.values(AllClosetId[0])[0]
+            id: {in: allClosetArr}
         }
     })
     
