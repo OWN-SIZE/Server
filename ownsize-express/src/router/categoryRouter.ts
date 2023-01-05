@@ -6,4 +6,7 @@ const router: Router = Router();
 //* 카테고리 전체 조회 GET /category
 router.get("/", categoryController.getAllCategory);
 
+//* 카테고리 생성 POST /category/createCategory
+router.post("/createCategory", categoryController.createCategory);
+
 export default router;
