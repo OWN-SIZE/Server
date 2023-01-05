@@ -3,20 +3,16 @@ import { PrismaClient, UnwrapTuple } from "@prisma/client";
 const prisma = new PrismaClient();
 
 //* 마이페이지 조회
-const getMyPage = async (id: number) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      id: id,
-    },
-  });
+const getMyPage = async () => {
+  const user = await prisma.user.findMany();
 
   if (!user) {
     return null;
   }
 
   const data = {
-    name: user.name,
-    email: user.email,
+    name: user[0].name,
+    email: user[0].email,
   };
   return data;
 };

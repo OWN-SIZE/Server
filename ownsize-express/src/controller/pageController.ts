@@ -5,9 +5,7 @@ import { success, fail } from "../constants/response";
 
 //* 마이페이지 조회 조회
 const getMyPage = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const data = await pageService.getMyPage(+id);
+  const data = await pageService.getMyPage();
 
   if (!data) {
     return res
