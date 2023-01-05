@@ -17,8 +17,23 @@ const getMyPage = async () => {
   return data;
 };
 
+//* 사이즈 추천 기록 조회
+const getRecCount = async () => {
+  const recCount = await prisma.recommend.count();
+
+  const recData = await prisma.recommend.findMany();
+
+  const data = {
+    recCount,
+    recData,
+  };
+
+  return data;
+};
+
 const pageService = {
   getMyPage,
+  getRecCount,
 };
 
 export default pageService;

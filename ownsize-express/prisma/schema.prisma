@@ -12,6 +12,7 @@ model User {
   name      String?     @db.VarChar(10)
   email     String?     @db.VarChar(50)
   AllCloset AllCloset[]
+  Recommend Recommend[]
 }
 
 model AllCloset {
@@ -60,11 +61,24 @@ model MySize {
   isWidthOfBottom Boolean?
 }
 
-model Category {
-  id               Int      @id @unique @default(autoincrement())
-  allClosetId      Int      @default(autoincrement())
-  categoryClosetId Int      @default(autoincrement())
-  categoryName     String?  @db.VarChar(100)
-  isPinCategory    Boolean?
-  image            String[]
+model AllCloset_Category {
+  id          Int @id @unique @default(autoincrement())
+  allClosetId Int @default(autoincrement())
+  categoryId  Int @default(autoincrement())
 }
+
+model Recommend {
+  id            Int     @id @unique @default(autoincrement())
+  userId        Int     @default(autoincrement())
+  url           String? @db.VarChar(200)
+  recommendSize String? @db.VarChar(10)
+  User          User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recommend_user_id_fk")
+}
+
+/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
+// model Category {
+// }
+
+/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
+// model CategoryCloset {
+// }
