@@ -45,10 +45,6 @@ model AllSizeTop {
   chest    Int?
 }
 
-/// We could not retrieve columns for the underlying table. Either it has none or you are missing rights to see them. Please check your privileges.
-// model Category {
-// }
-
 model MySize {
   id           Int  @id @unique @default(autoincrement())
   userId       Int  @default(autoincrement())
@@ -60,4 +56,13 @@ model MySize {
   thigh        Int?
   rise         Int?
   hem          Int?
+}
+
+model Category {
+  id               Int      @id @unique @default(autoincrement())
+  allClosetId      Int      @default(autoincrement())
+  categoryClosetId Int      @default(autoincrement())
+  categoryName     String?  @db.VarChar(100)
+  isPinCategory    Boolean?
+  image            String[]
 }

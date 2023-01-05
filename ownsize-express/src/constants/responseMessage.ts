@@ -35,6 +35,17 @@ export default {
   ALLCLOSET_INFO_ERROR: "업데이트할 정보 확인하세요",
   DELETE_ALLCLOSET_SUCCESS: "전체 옷장 의류 정보 삭제 성공",
 
+  // 카테고리
+  READ_CATEGORY_SUCCESS: "카테고리 조회 성공",
+  READ_CATEGORY_FAIL: "카테고리 조회 실패",
+
+  // 마이 사이즈
+  READ_MYSIZE_SUCCESS: "마이사이즈 조회 성공",
+  INSERT_MYTOPSIZE_SUCCESS: "내 상의 사이즈 정보 입력 성공",
+  INSERT_MYTOPSIZE_FAIL: "내 상의 사이즈 정보 입력 실패",
+  INSERT_MYBOTTOMSIZE_SUCCESS: "내 하의 사이즈 정보 입력 성공",
+  INSERT_MYBOTTOMSIZE_FAIL: "내 하의 사이즈 정보 입력 실패",
+
   // 마이페이지
   READ_MYPAGE_SUCCESS: "마이페이지 조회 성공",
   READ_MYPAGE_FAIL: "마이페이지 조회 실패",
