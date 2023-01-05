@@ -30,10 +30,32 @@ const deleteCategory = async (categoryId: number) => {
     });
 }
 
+//* 카테고리 상세 조회
+const getCategoryById = async (categoryId: number) => {
+
+    const AllClosetId = await prisma.allCloset_Category.findMany({
+        where: {
+            categoryId: categoryId
+        },
+        select: {
+            allClosetId: true
+        }
+    })
+
+    const data = await prisma.allCloset.findMany({
+        where: {
+            id: Object.values(AllClosetId[0])[0]
+        }
+    })
+    
+    return data;
+}
+
 const categoryService = {
     getAllCategory,
     createCategory,
-    deleteCategory
+    deleteCategory,
+    getCategoryById
 };
 
 export default categoryService;
