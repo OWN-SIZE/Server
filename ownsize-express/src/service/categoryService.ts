@@ -40,7 +40,6 @@ const getCategoryById = async (categoryId: number) => {
         },
         select: {
             allClosetId: true
-
         }
     })
 
