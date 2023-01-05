@@ -46,16 +46,18 @@ model AllSizeTop {
 }
 
 model MySize {
-  id           Int  @id @unique @default(autoincrement())
-  userId       Int  @default(autoincrement())
-  topLength    Int?
-  shoulder     Int?
-  chest        Int?
-  bottomLength Int?
-  waist        Int?
-  thigh        Int?
-  rise         Int?
-  hem          Int?
+  id              Int      @id @unique @default(autoincrement())
+  userId          Int      @default(autoincrement())
+  topLength       Int?
+  shoulder        Int?
+  chest           Int?
+  isWidthOfTop    Boolean?
+  bottomLength    Int?
+  waist           Int?
+  thigh           Int?
+  rise            Int?
+  hem             Int?
+  isWidthOfBottom Boolean?
 }
 
 model Category {
