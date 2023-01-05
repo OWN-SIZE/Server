@@ -8,8 +8,15 @@ export const success = (status: number, message: string, data?: any) => {
 };
 
 export const success2 = (status: number, message: string, data?: any) => {
-  const topKey = ["topLength", "shoulder", "chest"];
-  const bottomKey = ["bottomLength", "waist", "thigh", "rise", "hem"];
+  const topKey = ["topLength", "shoulder", "chest", "isWidthOfTop"];
+  const bottomKey = [
+    "bottomLength",
+    "waist",
+    "thigh",
+    "rise",
+    "hem",
+    "isWidthOfBottom",
+  ];
   let top: any = {};
   let bottom: any = {};
 
