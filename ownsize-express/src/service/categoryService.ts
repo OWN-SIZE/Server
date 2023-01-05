@@ -17,13 +17,23 @@ const createCategory = async (categoryName: string, isPinCategory: boolean, imag
             image: image
         }
     });
-    
+
     return data;
+}
+
+//* 카테고리 삭제
+const deleteCategory = async (categoryId: number) => {
+    await prisma.category.delete({
+        where: {
+            id: categoryId
+        }
+    });
 }
 
 const categoryService = {
     getAllCategory,
-    createCategory
+    createCategory,
+    deleteCategory
 };
 
 export default categoryService;

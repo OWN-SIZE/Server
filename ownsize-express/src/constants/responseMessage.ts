@@ -40,6 +40,7 @@ export default {
   READ_CATEGORY_FAIL: "카테고리 조회 실패",
   CREATE_CATEGORY_SUCCESS: "카테고리 생성 성공",
   CREATE_CATEGORY_FAIL: "카테고리 생성 실패",
+  DELETE_CATEGORY_SUCCESS: "카테고리 삭제 성공",
 
   // 마이 사이즈
   READ_MYSIZE_SUCCESS: "마이사이즈 조회 성공",

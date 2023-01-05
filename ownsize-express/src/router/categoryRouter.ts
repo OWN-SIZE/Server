@@ -9,4 +9,7 @@ router.get("/", categoryController.getAllCategory);
 //* 카테고리 생성 POST /category/createCategory
 router.post("/createCategory", categoryController.createCategory);
 
+//* 카테고리 삭제 DELETE /category/categoryId
+router.delete("/:categoryId", categoryController.deleteCategory);
+
 export default router;

@@ -23,9 +23,19 @@ const createCategory = async (req: Request, res: Response) => {
   return res.status(sc.OK).send(success(sc.OK, rm.CREATE_CATEGORY_SUCCESS, data));
 }
 
+//* 카테고리 삭제
+const deleteCategory = async (req: Request, res: Response) => {
+  const { categoryId } = req.params;
+
+  await categoryService.deleteCategory(+categoryId);
+
+  return res.status(sc.OK).send(success(sc.OK, rm.DELETE_CATEGORY_SUCCESS));
+}
+
 const categoryController = {
   getAllCategory,
-  createCategory
+  createCategory,
+  deleteCategory
 };
 
 
