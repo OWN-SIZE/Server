@@ -4,22 +4,13 @@ import { rm, sc } from "../constants";
 import { success, fail } from "../constants/response";
 
 //* 전체 옷장 조회
-const getAllClosetById = async (req: Request, res: Response) => {
-  const { userId } = req.params;
+const getAllCloset = async (req: Request, res: Response) => {
+  const data = await closetService.getAllCloset();
 
-  const data = await closetService.getAllClosetById(+userId);
+  return res.status(sc.OK).send(success(sc.OK, rm.READ_ALLCLOSET_SUCCESS, data));
+}
 
-  if (!data) {
-    return res
-      .status(sc.NOT_FOUND)
-      .send(fail(sc.NOT_FOUND, rm.READ_ALLCLOSET_FAIL));
-  }
-  return res
-    .status(sc.OK)
-    .send(success(sc.OK, rm.READ_ALLCLOSET_SUCCESS, data));
-};
-
-//* 전체 옷장 정보 수정
+//* 전체 옷장 내 의류 정보 수정
 const updateCloset = async (req: Request, res: Response) => {
   const { productName, size, memo, isPin } = req.body;
   const { productId } = req.params;
@@ -49,6 +40,7 @@ const updateCloset = async (req: Request, res: Response) => {
     .send(success(sc.CREATED, rm.UPDATE_ALLCLOSET_SUCCESS, data));
 };
 
+//* 전체 옷장 내 의류 정보 삭제
 const deleteCloset = async (req: Request, res: Response) => {
   const { productId } = req.params;
 
@@ -58,7 +50,7 @@ const deleteCloset = async (req: Request, res: Response) => {
 };
 
 const closetController = {
-  getAllClosetById,
+  getAllCloset,
   updateCloset,
   deleteCloset,
 };

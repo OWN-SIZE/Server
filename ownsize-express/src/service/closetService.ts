@@ -2,17 +2,12 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 //* 전체 옷장 조회
-const getAllClosetById = async (userId: number) => {
-    const data = await prisma.allCloset.findMany({
-        where: {
-            userId: userId
-        }
-    });
-  
+const getAllCloset = async () => {
+    const data = await prisma.allCloset.findMany();
     return data;
 };
 
-//* 전체 옷장 정보 수정
+//* 전체 옷장 의류 정보 수정
 const updateCloset = async (productId: number, productName?: string, size?: string, memo?: string, isPin?: boolean) => {
     const data = await prisma.allCloset.update({
         where: {
@@ -39,9 +34,10 @@ const deleteCloset = async (productId: number) => {
 }
 
 const closetService = {
-    getAllClosetById,
+    getAllCloset,
     updateCloset,
     deleteCloset,
+
 };
 
 export default closetService;
