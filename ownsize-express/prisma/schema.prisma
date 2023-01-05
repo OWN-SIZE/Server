@@ -45,15 +45,6 @@ model AllSizeTop {
   chest    Int?
 }
 
-model Category {
-  id               Int      @id @unique @default(autoincrement())
-  allClosetId      Int      @default(autoincrement())
-  categoryClosetId Int      @default(autoincrement())
-  categoryName     String?  @db.VarChar(100)
-  image            String?  @db.VarChar(500)
-  isPinCategory    Boolean?
-}
-
 model MySize {
   id           Int  @id @unique @default(autoincrement())
   userId       Int  @default(autoincrement())
@@ -65,4 +56,13 @@ model MySize {
   thigh        Int?
   rise         Int?
   hem          Int?
+}
+
+model Category {
+  id               Int      @id @unique @default(autoincrement())
+  allClosetId      Int      @default(autoincrement())
+  categoryClosetId Int      @default(autoincrement())
+  categoryName     String?  @db.VarChar(100)
+  isPinCategory    Boolean?
+  image            String[]
 }
