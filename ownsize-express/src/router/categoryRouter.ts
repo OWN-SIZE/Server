@@ -15,4 +15,7 @@ router.delete("/:categoryId", categoryController.deleteCategory);
 //* 카테고리 상세 조회 GET /category/:categoryId
 router.get("/:categoryId", categoryController.getCategoryById);
 
+//* 카테고리 내 의류 삭제 DELETE /category/:categoryId/:allClosetId
+router.delete("/:categoryId/:allClosetId", categoryController.deleteInCategory);
+
 export default router;
