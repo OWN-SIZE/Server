@@ -49,10 +49,34 @@ const deleteCloset = async (req: Request, res: Response) => {
   return res.status(sc.OK).send(success(sc.OK, rm.DELETE_ALLCLOSET_SUCCESS));
 };
 
+//* 카테고리에 의류 추가
+const toCategory = async (req: Request, res: Response) => {
+  const { productId, categoryId } = req.body;
+
+  if (!productId || !categoryId) {
+    return res
+    .status(sc.BAD_REQUEST)
+    .send(fail(sc.BAD_REQUEST, rm.TOCATEGORY_INFO_ERROR));
+  }
+
+  const data = await closetService.toCategory(+productId, +categoryId);
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.TOCATEGORY_FAIL));
+  }
+
+  return res
+    .status(sc.OK)
+    .send(success(sc.OK, rm.TOCATEGORY_SUCCESS, data));
+}
+
 const closetController = {
   getAllCloset,
   updateCloset,
   deleteCloset,
+  toCategory
 };
 
 export default closetController;
