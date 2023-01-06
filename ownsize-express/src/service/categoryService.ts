@@ -58,11 +58,25 @@ const getCategoryById = async (categoryId: number) => {
     return data;
 }
 
+//* 카테고리 내 의류 삭제
+const deleteInCategory = async(categoryId: number, allClosetId: number) => {
+    
+    await prisma.allCloset_Category.deleteMany({
+        where: {
+            AND: [
+                {categoryId: categoryId},
+                {allClosetId: allClosetId}
+            ]
+        }
+    })
+}
+
 const categoryService = {
     getAllCategory,
     createCategory,
     deleteCategory,
-    getCategoryById
+    getCategoryById,
+    deleteInCategory
 };
 
 export default categoryService;
