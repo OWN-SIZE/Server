@@ -68,8 +68,8 @@ const toCategory = async (req: Request, res: Response) => {
   }
 
   return res
-    .status(sc.OK)
-    .send(success(sc.OK, rm.TOCATEGORY_SUCCESS, data));
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.TOCATEGORY_SUCCESS, data));
 }
 
 const closetController = {
