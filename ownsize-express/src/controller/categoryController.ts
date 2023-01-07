@@ -45,11 +45,21 @@ const getCategoryById = async (req: Request, res: Response) => {
   return res.status(sc.OK).send(success(sc.OK, rm.READ_CATEGORY_DETAIL_SUCCESS, data));
 }
 
+//* 카테고리 내 의류 삭제
+const deleteInCategory = async (req: Request, res: Response) => {
+  const {categoryId, productId} = req.params;
+
+  await categoryService.deleteInCategory(+categoryId, +productId);
+
+  return res.status(sc.OK).send(success(sc.OK, rm.DELETE_INCATEGORY_ITEM_SUCCESS));
+}
+
 const categoryController = {
   getAllCategory,
   createCategory,
   deleteCategory,
-  getCategoryById
+  getCategoryById,
+  deleteInCategory
 };
 
 

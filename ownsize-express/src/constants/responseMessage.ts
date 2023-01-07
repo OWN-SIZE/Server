@@ -34,6 +34,9 @@ export default {
   UPDATE_ALLCLOSET_FAIL: "전체 옷장 의류 정보 수정 실패",
   ALLCLOSET_INFO_ERROR: "업데이트할 정보 확인하세요",
   DELETE_ALLCLOSET_SUCCESS: "전체 옷장 의류 정보 삭제 성공",
+  TOCATEGORY_INFO_ERROR: "카테고리에 추가할 정보 확인하세요",
+  TOCATEGORY_SUCCESS: "카테고리에 의류 추가 성공",
+  TOCATEGORY_FAIL: "카테고리에 의류 추가 실패",
 
   // 카테고리
   READ_CATEGORY_SUCCESS: "카테고리 조회 성공",
@@ -43,6 +46,8 @@ export default {
   DELETE_CATEGORY_SUCCESS: "카테고리 삭제 성공",
   READ_CATEGORY_DETAIL_SUCCESS: "카테고리 상세 조회 성공",
   READ_CATEGORY_DETAIL_FAIL: "카테고리 상세 조회 실패",
+  DELETE_INCATEGORY_ITEM_SUCCESS: "카테고리 내 의류 삭제 성공",
+  DELETE_INCATEGORY_ITEM_FAIL: "카테고리 내 의류 삭제 실패",
 
   // 마이 사이즈
   READ_MYSIZE_SUCCESS: "마이사이즈 조회 성공",
