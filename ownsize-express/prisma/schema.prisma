@@ -11,6 +11,7 @@ model User {
   id        Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
   name      String?     @db.VarChar(10)
   email     String?     @db.VarChar(50)
+  token     String?     @db.VarChar(500)
   AllCloset AllCloset[]
   Recommend Recommend[]
 }
