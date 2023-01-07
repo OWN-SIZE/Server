@@ -13,6 +13,7 @@ const getMyPage = async () => {
   const data = {
     name: user[0].name,
     email: user[0].email,
+    userImage: user[0].userImage,
   };
   return data;
 };

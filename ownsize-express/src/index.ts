@@ -1,7 +1,7 @@
 // src/index.ts
 import express, { NextFunction, Request, Response } from "express";
-import router from './router';
-import cors from 'cors';
+import router from "./router";
+import cors from "cors";
 
 const app = express(); // express 객체 받아옴
 const PORT = 3003; // 사용할 port를 3003번으로 설정
