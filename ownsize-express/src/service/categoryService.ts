@@ -34,19 +34,19 @@ const deleteCategory = async (categoryId: number) => {
 //* 카테고리 상세 조회
 const getCategoryById = async (categoryId: number) => {
 
-    const AllClosetId = await prisma.allCloset_Category.findMany({
+    const ProductId = await prisma.allCloset_Category.findMany({
         where: {
             categoryId: categoryId
         },
         select: {
-            allClosetId: true
+            productId: true
         }
     })
 
     const allClosetArr = [];
 
-    for (var i = 0; i < AllClosetId.length; i++){
-       allClosetArr.push(Object.values(AllClosetId[i])[0])
+    for (var i = 0; i < ProductId.length; i++){
+       allClosetArr.push(Object.values(ProductId[i])[0])
     }
     
     const data = await prisma.allCloset.findMany({
@@ -59,13 +59,13 @@ const getCategoryById = async (categoryId: number) => {
 }
 
 //* 카테고리 내 의류 삭제
-const deleteInCategory = async(categoryId: number, allClosetId: number) => {
+const deleteInCategory = async(categoryId: number, productId: number) => {
     
     await prisma.allCloset_Category.deleteMany({
         where: {
             AND: [
                 {categoryId: categoryId},
-                {allClosetId: allClosetId}
+                {productId: productId}
             ]
         }
     })

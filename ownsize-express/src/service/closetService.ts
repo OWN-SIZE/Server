@@ -39,10 +39,23 @@ const deleteCloset = async (productId: number) => {
   });
 };
 
+//* 카테고리에 의류 추가
+const toCategory = async (productId: number, categoryId: number) => {
+  const data = await prisma.allCloset_Category.create({
+    data: {
+      productId: productId,
+      categoryId: categoryId
+    }
+  });
+  
+  return data;
+}
+
 const closetService = {
   getAllCloset,
   updateCloset,
   deleteCloset,
+  toCategory
 };
 
 export default closetService;

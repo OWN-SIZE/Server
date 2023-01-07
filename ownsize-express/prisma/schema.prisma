@@ -11,6 +11,7 @@ model User {
   id        Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
   name      String?     @db.VarChar(10)
   email     String?     @db.VarChar(50)
+  token     String?     @db.VarChar(500)
   AllCloset AllCloset[]
   Recommend Recommend[]
 }
@@ -71,11 +72,11 @@ model Category {
 }
 
 model AllCloset_Category {
-  id          Int       @id @unique @default(autoincrement())
-  allClosetId Int       @default(autoincrement())
-  categoryId  Int       @default(autoincrement())
-  AllCloset   AllCloset @relation(fields: [allClosetId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_allcloset_id_fk")
-  Category    Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_category_id_fk")
+  id         Int       @id @unique @default(autoincrement())
+  productId  Int       @default(autoincrement())
+  categoryId Int       @default(autoincrement())
+  AllCloset  AllCloset @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_allcloset_id_fk")
+  Category   Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_category_id_fk")
 }
 
 model Recommend {
