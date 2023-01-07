@@ -12,6 +12,7 @@ model User {
   name      String?     @db.VarChar(10)
   email     String?     @db.VarChar(50)
   token     String?     @db.VarChar(500)
+  userImage String?     @db.VarChar(500)
   AllCloset AllCloset[]
   Recommend Recommend[]
 }
@@ -27,6 +28,7 @@ model AllCloset {
   isRecommend        Boolean?
   isPin              Boolean?
   mallName           String?              @db.VarChar(50)
+  topOrBottom        Int?
   User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "archive_user_id_fk")
   AllCloset_Category AllCloset_Category[]
 }
