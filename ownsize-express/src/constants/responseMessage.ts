@@ -62,6 +62,10 @@ export default {
   READ_RECCOUNT_SUCCESS: "사이즈 추천 기록 조회 성공",
   READ_RECCOUNT_FAIL: "사이즈 추천 기록 조회 실패",
 
+  // 익스텐션
+  TOALLCLOSET_SUCCESS: "전체 옷장에 저장 성공",
+  TOALLCLOSET_FAIL: "전체 옷장에 저장 실패",
+
   // 서버 내 오류
   INTERNAL_SERVER_ERROR: "서버 내 오류",
 };
