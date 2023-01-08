@@ -64,6 +64,8 @@ model MySize {
   rise            Int?
   hem             Int?
   isWidthOfBottom Boolean?
+  isManual        Boolean? @default(false)
+  size            String?  @db.VarChar(10)
 }
 
 model Category {

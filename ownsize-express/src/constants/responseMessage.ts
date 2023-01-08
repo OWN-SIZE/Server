@@ -65,6 +65,8 @@ export default {
   // 익스텐션
   TOALLCLOSET_SUCCESS: "전체 옷장에 저장 성공",
   TOALLCLOSET_FAIL: "전체 옷장에 저장 실패",
+  INPUT_MANUALLY_SUCCESS: "비교 사이즈 수동입력 성공",
+  INPUT_MANUALLY_FAIL: "비교 사이즈 수동입력 실패",
 
   // 서버 내 오류
   INTERNAL_SERVER_ERROR: "서버 내 오류",

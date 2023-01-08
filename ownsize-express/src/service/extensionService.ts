@@ -28,9 +28,48 @@ const toAllCloset = async (
     return data;
 };
 
+//* 비교 사이즈 수동 입력
+const inputSize = async (
+    size: string,
+
+    topLength: number,
+    shoulder: number,
+    chest: number,
+    isWidthOfTop: boolean,
+
+    bottomLength: number,
+    waist: number,
+    thigh: number,
+    rise: number,
+    hem: number,
+    isWidthOfBottom: boolean
+) => {
+    const data = prisma.mySize.create({
+        data: {
+            size: size,
+            
+            topLength: topLength,
+            shoulder: shoulder,
+            chest: chest,
+            isWidthOfTop: isWidthOfTop,
+        
+            bottomLength: bottomLength,
+            waist: waist,
+            thigh: thigh,
+            rise: rise,
+            hem: hem,
+            isWidthOfBottom: isWidthOfBottom,
+        
+            isManual: true
+        }
+    })
+
+    return data;
+}
 
 const extensionService = {
     toAllCloset,
+    inputSize,
 };
 
 export default extensionService;
