@@ -5,7 +5,7 @@ import extensionService from "../service/extensionService";
 
 //* 전체 옷장에 저장
 const toAllCloset = async (req: Request, res: Response) => {
-    const { productUrl, image, mallName, productName, size, isRecommend, topOrBottom, faviconUrl } = req.body;
+    const { productUrl, image, mallName, productName, size, isRecommend, faviconUrl } = req.body;
     
     const data = await extensionService
                         .toAllCloset(
@@ -15,7 +15,6 @@ const toAllCloset = async (req: Request, res: Response) => {
                             productName, 
                             size,
                             isRecommend, 
-                            topOrBottom,
                             faviconUrl,
                             //userId
                         );
