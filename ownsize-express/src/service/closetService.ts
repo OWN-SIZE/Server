@@ -43,40 +43,40 @@ const deleteCloset = async (productId: number) => {
 const getIncludingId = async (productId: number) => {
   const data = await prisma.allCloset_Category.findMany({
     where: {
-      productId: productId
+      productId: productId,
     },
     select: {
-      categoryId: true
-    }
-  })
+      categoryId: true,
+    },
+  });
 
   const includeArr = [];
 
-  for (var i = 0; i < data.length; i++){
-      includeArr.push(Object.values(data[i])[0])
+  for (var i = 0; i < data.length; i++) {
+    includeArr.push(Object.values(data[i])[0]);
   }
-    
+
   return includeArr;
-}
+};
 
 //* 카테고리에 의류 추가
 const toCategory = async (productId: number, categoryId: number) => {
   const data = await prisma.allCloset_Category.create({
     data: {
       productId: productId,
-      categoryId: categoryId
-    }
+      categoryId: categoryId,
+    },
   });
-  
+
   return data;
-}
+};
 
 const closetService = {
   getAllCloset,
   updateCloset,
   deleteCloset,
   getIncludingId,
-  toCategory
+  toCategory,
 };
 
 export default closetService;
