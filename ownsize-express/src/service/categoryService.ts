@@ -31,6 +31,19 @@ const deleteCategory = async (categoryId: number) => {
     });
 }
 
+//* 카테고리 수정
+const updateCategory = async (categoryId: number, categoryName: string) => {
+    const data = await prisma.category.update({
+        where: {
+            id: categoryId
+        },
+        data: {
+            categoryName: categoryName
+        }
+    })
+    return data;
+}
+
 //* 카테고리 상세 조회
 const getCategoryById = async (categoryId: number) => {
 
@@ -75,6 +88,7 @@ const categoryService = {
     getAllCategory,
     createCategory,
     deleteCategory,
+    updateCategory,
     getCategoryById,
     deleteInCategory
 };
