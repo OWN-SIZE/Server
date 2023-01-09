@@ -9,7 +9,6 @@ const toAllCloset = async (
     productName: string,
     size: string,
     isRecommend: boolean,
-    topOrBottom: number,
     faviconUrl: string,
 ) => {
     const data = await prisma.allCloset.create({
