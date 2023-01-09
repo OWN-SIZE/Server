@@ -1,3 +1,4 @@
+import { UnwrapTuple } from '@prisma/client';
 import { Request, Response } from "express";
 import { rm, sc } from "../constants";
 import { success, fail } from "../constants/response";
@@ -32,6 +33,31 @@ const deleteCategory = async (req: Request, res: Response) => {
   return res.status(sc.OK).send(success(sc.OK, rm.DELETE_CATEGORY_SUCCESS));
 }
 
+//* 카테고리 수정
+const updateCategory = async (req: Request, res: Response) => {
+  const { categoryId } = req.params;
+  const { categoryName } = req.body;
+
+  if (!categoryId || !categoryName) {
+    return res
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.UPDATE_INFO_ERROR));
+  }
+
+  const data = await categoryService.updateCategory(+categoryId, categoryName);
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.CATEGORY_UPDATE_FAIL));
+  }
+
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.CATEGORY_UPDATE_SUCCESS, data));
+
+}
+
 //* 카테고리 상세 조회
 const getCategoryById = async (req: Request, res: Response) => {
   const { categoryId } = req.params;
@@ -43,6 +69,24 @@ const getCategoryById = async (req: Request, res: Response) => {
   }
   
   return res.status(sc.OK).send(success(sc.OK, rm.READ_CATEGORY_DETAIL_SUCCESS, data));
+}
+
+//* 카테고리 내 의류 핀 고정/해제
+const pinItem = async (req: Request, res: Response) => {
+  const { categoryId, productId } = req.params;
+  const { isInPin } = req.body;
+  
+  const data = await categoryService.pinItem(+categoryId, +productId, isInPin);
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.PIN_IN_CATEGORY_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.PIN_IN_CATEGORY_SUCCESS, data));
+
 }
 
 //* 카테고리 내 의류 삭제
@@ -58,7 +102,9 @@ const categoryController = {
   getAllCategory,
   createCategory,
   deleteCategory,
+  updateCategory,
   getCategoryById,
+  pinItem,
   deleteInCategory
 };
 

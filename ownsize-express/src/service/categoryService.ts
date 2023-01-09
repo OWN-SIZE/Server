@@ -31,6 +31,19 @@ const deleteCategory = async (categoryId: number) => {
     });
 }
 
+//* 카테고리 수정
+const updateCategory = async (categoryId: number, categoryName: string) => {
+    const data = await prisma.category.update({
+        where: {
+            id: categoryId
+        },
+        data: {
+            categoryName: categoryName
+        }
+    })
+    return data;
+}
+
 //* 카테고리 상세 조회
 const getCategoryById = async (categoryId: number) => {
 
@@ -58,6 +71,34 @@ const getCategoryById = async (categoryId: number) => {
     return data;
 }
 
+//* 카테고리 내 의류 핀 고정/해제
+const pinItem = async (categoryId: number, productId: number, isInPin: boolean) => {
+    
+    
+    const ProductId = await prisma.allCloset_Category.findMany({
+        where: {
+            AND: [
+                {categoryId: categoryId},
+                {productId: productId}
+            ]
+        },
+        select: {
+            productId: true
+        }
+    })
+
+   const data = await prisma.allCloset.update({
+       where: {
+           id: Object.values(ProductId[0])[0]
+       },
+       data: {
+           isInPin: isInPin
+       }
+   })
+   
+    return data;
+}
+
 //* 카테고리 내 의류 삭제
 const deleteInCategory = async(categoryId: number, productId: number) => {
     
@@ -75,7 +116,9 @@ const categoryService = {
     getAllCategory,
     createCategory,
     deleteCategory,
+    updateCategory,
     getCategoryById,
+    pinItem,
     deleteInCategory
 };
 

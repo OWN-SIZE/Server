@@ -24,12 +24,11 @@ model AllCloset {
   size               String?              @db.VarChar(10)
   memo               String?              @db.VarChar(50)
   isRecommend        Boolean?
-  isPin              Boolean?
+  isPin              Boolean              @default(false)
   mallName           String?              @db.VarChar(50)
-  topOrBottom        Int?
   productUrl         String?              @db.VarChar(500)
   faviconUrl         String?              @db.VarChar(500)
-  isInPin            Boolean?
+  isInPin            Boolean              @default(false)
   User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_user_id_fk")
   AllCloset_Category AllCloset_Category[]
 }

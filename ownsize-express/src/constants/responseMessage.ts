@@ -47,8 +47,13 @@ export default {
   CREATE_CATEGORY_SUCCESS: "카테고리 생성 성공",
   CREATE_CATEGORY_FAIL: "카테고리 생성 실패",
   DELETE_CATEGORY_SUCCESS: "카테고리 삭제 성공",
+  UPDATE_INFO_ERROR: "카테고리 업데이트 정보 확인하세요",
+  CATEGORY_UPDATE_SUCCESS: "카테고리 수정 성공",
+  CATEGORY_UPDATE_FAIL: "카테고리 수정 실패",
   READ_CATEGORY_DETAIL_SUCCESS: "카테고리 상세 조회 성공",
   READ_CATEGORY_DETAIL_FAIL: "카테고리 상세 조회 실패",
+  PIN_IN_CATEGORY_SUCCESS: "카테고리 내 의류 핀 고정/해제 성공",
+  PIN_IN_CATEGORY_FAIL: "카테고리 내 의류 핀 고정/해제 실패",
   DELETE_INCATEGORY_ITEM_SUCCESS: "카테고리 내 의류 삭제 성공",
   DELETE_INCATEGORY_ITEM_FAIL: "카테고리 내 의류 삭제 실패",
 
@@ -68,6 +73,8 @@ export default {
   // 익스텐션
   TOALLCLOSET_SUCCESS: "전체 옷장에 저장 성공",
   TOALLCLOSET_FAIL: "전체 옷장에 저장 실패",
+  INPUT_MANUALLY_SUCCESS: "비교 사이즈 수동입력 성공",
+  INPUT_MANUALLY_FAIL: "비교 사이즈 수동입력 실패",
 
   // 서버 내 오류
   INTERNAL_SERVER_ERROR: "서버 내 오류",
