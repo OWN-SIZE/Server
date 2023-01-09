@@ -30,6 +30,8 @@ const toAllCloset = async (
 
 //* 비교 사이즈 수동 입력
 const inputSize = async (
+    isManual: boolean,
+    topOrBottom: number,
     size: string,
 
     topLength: number,
@@ -44,27 +46,56 @@ const inputSize = async (
     hem: number,
     isWidthOfBottom: boolean
 ) => {
-    const data = prisma.mySize.create({
-        data: {
-            size: size,
-            
-            topLength: topLength,
-            shoulder: shoulder,
-            chest: chest,
-            isWidthOfTop: isWidthOfTop,
-        
-            bottomLength: bottomLength,
-            waist: waist,
-            thigh: thigh,
-            rise: rise,
-            hem: hem,
-            isWidthOfBottom: isWidthOfBottom,
-        
-            isManual: true
-        }
-    })
-
-    return data;
+    if (topOrBottom === 0) {
+        const data = prisma.allSizeTop.createMany({
+            data: [
+                {
+                isManual: isManual,
+                size: size, 
+                topLength: topLength,
+                shoulder: shoulder,
+                chest: chest,
+                isWidthOfTop: isWidthOfTop,
+                },
+                { 
+                isManual: isManual,
+                size: size,    
+                topLength: topLength,
+                shoulder: shoulder,
+                chest: chest,
+                isWidthOfTop: isWidthOfTop
+                }
+            ]
+        })
+        return data;
+    }
+    else if (topOrBottom === 1) {
+        const data = prisma.allSizeBottom.createMany({
+            data: [
+                {
+                isManual: isManual,
+                size: size, 
+                bottomLength: bottomLength,
+                waist: waist,
+                thigh: thigh,
+                rise: rise,
+                hem: hem,
+                isWidthOfBottom: isWidthOfBottom
+                },
+                { 
+                isManual: isManual,
+                size: size, 
+                bottomLength: bottomLength,
+                waist: waist,
+                thigh: thigh,
+                rise: rise,
+                hem: hem,
+                isWidthOfBottom: isWidthOfBottom
+                }
+            ]
+        })
+        return data;
+    }
 }
 
 const extensionService = {

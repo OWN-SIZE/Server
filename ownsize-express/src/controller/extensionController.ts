@@ -28,10 +28,12 @@ const toAllCloset = async (req: Request, res: Response) => {
 
 //* 비교 사이즈 수동 입력
 const inputSize = async (req: Request, res: Response) => {
-    const {size, topLength, shoulder, chest, isWidthOfTop, bottomLength, waist, thigh, rise, hem, isWidthOfBottom} = req.body;
+    const {isManual, topOrBottom, size, topLength, shoulder, chest, isWidthOfTop, bottomLength, waist, thigh, rise, hem, isWidthOfBottom} = req.body;
 
     const data = await extensionService
                         .inputSize(
+                            isManual,
+                            topOrBottom,
                             size, 
                             topLength, 
                             shoulder, 
