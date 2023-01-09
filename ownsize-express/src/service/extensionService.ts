@@ -29,6 +29,7 @@ const toAllCloset = async (
 //* 비교 사이즈 수동 입력
 const inputSize = async (
     isManual: boolean,
+    manualInputNum: number,
     topOrBottom: number,
     size: string,
 
@@ -46,42 +47,23 @@ const inputSize = async (
 ) => {
     if (topOrBottom === 0) {
         const data = prisma.allSizeTop.createMany({
-            data: [
-                {
+            data: {
                 isManual: isManual,
-                size: size, 
-                topLength: topLength,
-                shoulder: shoulder,
-                chest: chest,
-                isWidthOfTop: isWidthOfTop,
-                },
-                { 
-                isManual: isManual,
+                manualInputNum: manualInputNum,
                 size: size,    
                 topLength: topLength,
                 shoulder: shoulder,
                 chest: chest,
                 isWidthOfTop: isWidthOfTop
-                }
-            ]
+            }
         })
         return data;
     }
     else if (topOrBottom === 1) {
         const data = prisma.allSizeBottom.createMany({
-            data: [
-                {
+            data: {
                 isManual: isManual,
-                size: size, 
-                bottomLength: bottomLength,
-                waist: waist,
-                thigh: thigh,
-                rise: rise,
-                hem: hem,
-                isWidthOfBottom: isWidthOfBottom
-                },
-                { 
-                isManual: isManual,
+                manualInputNum: manualInputNum,
                 size: size, 
                 bottomLength: bottomLength,
                 waist: waist,
@@ -90,7 +72,6 @@ const inputSize = async (
                 hem: hem,
                 isWidthOfBottom: isWidthOfBottom
                 }
-            ]
         })
         return data;
     }

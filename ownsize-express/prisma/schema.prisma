@@ -44,17 +44,19 @@ model AllSizeBottom {
   isWidthOfBottom Boolean?
   isManual        Boolean?
   topOrBottom     Boolean?
+  manualInputNum  Int?
 }
 
 model AllSizeTop {
-  id           Int      @id @unique @default(autoincrement())
-  size         String?  @db.VarChar(10)
-  topLength    Int?
-  shoulder     Int?
-  chest        Int?
-  isWidthOfTop Boolean?
-  isManual     Boolean?
-  topOrBottom  Boolean?
+  id             Int      @id @unique @default(autoincrement())
+  size           String?  @db.VarChar(10)
+  topLength      Int?
+  shoulder       Int?
+  chest          Int?
+  isWidthOfTop   Boolean?
+  isManual       Boolean?
+  topOrBottom    Boolean?
+  manualInputNum Int?
 }
 
 model MySize {
