@@ -4,7 +4,7 @@ import closetRouter from "./closetRouter";
 import pageRouter from "./pageRouter";
 import sizeRouter from "./sizeRouter";
 import categoryRouter from "./categoryRouter";
-//import loginRouter from "./loginRouter";
+import authRouter from "./authRouter";
 
 const router: Router = Router();
 
@@ -13,6 +13,6 @@ router.use("/allCloset", closetRouter);
 router.use("/mypage", pageRouter);
 router.use("/mySize", sizeRouter);
 router.use("/category", categoryRouter);
-//router.use("/login", loginRouter);
+router.use("/auth", authRouter);
 
 export default router;
