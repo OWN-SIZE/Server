@@ -11,7 +11,6 @@ model User {
   id        Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
   name      String?     @db.VarChar(10)
   email     String?     @db.VarChar(50)
-  token     String?     @db.VarChar(500)
   userImage String?     @db.VarChar(500)
   AllCloset AllCloset[]
   Recommend Recommend[]
@@ -25,30 +24,38 @@ model AllCloset {
   size               String?              @db.VarChar(10)
   memo               String?              @db.VarChar(50)
   isRecommend        Boolean?
-  isPin              Boolean?             @default(false)
+  isPin              Boolean?
   mallName           String?              @db.VarChar(50)
   topOrBottom        Int?
   productUrl         String?              @db.VarChar(500)
   faviconUrl         String?              @db.VarChar(500)
+  isInPin            Boolean?
   User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_user_id_fk")
   AllCloset_Category AllCloset_Category[]
 }
 
 model AllSizeBottom {
-  id     Int     @id @unique @default(autoincrement())
-  size   String? @db.VarChar(10)
-  length Int?
-  waist  Int?
-  thigh  Int?
-  rise   Int?
+  id              Int      @id @unique @default(autoincrement())
+  size            String?  @db.VarChar(10)
+  bottomLength    Int?
+  waist           Int?
+  thigh           Int?
+  rise            Int?
+  hem             Int?
+  isWidthOfBottom Boolean?
+  isManual        Boolean?
+  topOrBottom     Boolean?
 }
 
 model AllSizeTop {
-  id       Int     @id @unique @default(autoincrement())
-  size     String? @db.VarChar(10)
-  length   Int?
-  shoulder Int?
-  chest    Int?
+  id           Int      @id @unique @default(autoincrement())
+  size         String?  @db.VarChar(10)
+  topLength    Int?
+  shoulder     Int?
+  chest        Int?
+  isWidthOfTop Boolean?
+  isManual     Boolean?
+  topOrBottom  Boolean?
 }
 
 model MySize {
