@@ -21,7 +21,6 @@ const toAllCloset = async (
             productName: productName,
             size: size,
             isRecommend: isRecommend,
-            topOrBottom: topOrBottom,
             faviconUrl: faviconUrl
         }
     });

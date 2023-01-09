@@ -71,6 +71,24 @@ const getCategoryById = async (req: Request, res: Response) => {
   return res.status(sc.OK).send(success(sc.OK, rm.READ_CATEGORY_DETAIL_SUCCESS, data));
 }
 
+//* 카테고리 내 의류 핀 고정/해제
+const pinItem = async (req: Request, res: Response) => {
+  const { categoryId, productId } = req.params;
+  const { isInPin } = req.body;
+  
+  const data = await categoryService.pinItem(+categoryId, +productId, isInPin);
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.PIN_IN_CATEGORY_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.PIN_IN_CATEGORY_SUCCESS, data));
+
+}
+
 //* 카테고리 내 의류 삭제
 const deleteInCategory = async (req: Request, res: Response) => {
   const {categoryId, productId} = req.params;
@@ -86,6 +104,7 @@ const categoryController = {
   deleteCategory,
   updateCategory,
   getCategoryById,
+  pinItem,
   deleteInCategory
 };
 

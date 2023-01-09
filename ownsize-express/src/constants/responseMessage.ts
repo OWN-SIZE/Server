@@ -52,6 +52,8 @@ export default {
   CATEGORY_UPDATE_FAIL: "카테고리 수정 실패",
   READ_CATEGORY_DETAIL_SUCCESS: "카테고리 상세 조회 성공",
   READ_CATEGORY_DETAIL_FAIL: "카테고리 상세 조회 실패",
+  PIN_IN_CATEGORY_SUCCESS: "카테고리 내 의류 핀 고정/해제 성공",
+  PIN_IN_CATEGORY_FAIL: "카테고리 내 의류 핀 고정/해제 실패",
   DELETE_INCATEGORY_ITEM_SUCCESS: "카테고리 내 의류 삭제 성공",
   DELETE_INCATEGORY_ITEM_FAIL: "카테고리 내 의류 삭제 실패",
 
