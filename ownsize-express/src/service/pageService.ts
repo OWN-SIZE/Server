@@ -1,5 +1,4 @@
 import { PrismaClient, UnwrapTuple } from "@prisma/client";
-//import { serialize } from "v8";
 const prisma = new PrismaClient();
 
 //* 마이페이지 조회

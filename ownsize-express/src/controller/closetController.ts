@@ -15,7 +15,7 @@ const updateCloset = async (req: Request, res: Response) => {
   const { productName, size, memo, isPin } = req.body;
   const { productId } = req.params;
 
-  if (!productId || (!productName && !size && !memo && !isPin)) {
+  if (!productId && (!productName || !size || !memo || !isPin)) {
     return res
       .status(sc.BAD_REQUEST)
       .send(fail(sc.BAD_REQUEST, rm.ALLCLOSET_INFO_ERROR));

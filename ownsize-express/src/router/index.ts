@@ -4,6 +4,7 @@ import closetRouter from "./closetRouter";
 import pageRouter from "./pageRouter";
 import sizeRouter from "./sizeRouter";
 import categoryRouter from "./categoryRouter";
+import extensionRouter from "./extensionRouter";
 
 const router: Router = Router();
 
@@ -12,5 +13,6 @@ router.use("/allCloset", closetRouter);
 router.use("/mypage", pageRouter);
 router.use("/mySize", sizeRouter);
 router.use("/category", categoryRouter);
+router.use("/extension", extensionRouter);
 
 export default router;

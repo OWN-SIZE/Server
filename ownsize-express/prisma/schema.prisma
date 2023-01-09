@@ -23,13 +23,14 @@ model AllCloset {
   image              String?              @db.VarChar(500)
   productName        String?              @db.VarChar(36)
   size               String?              @db.VarChar(10)
-  link               String?              @db.VarChar(200)
   memo               String?              @db.VarChar(50)
   isRecommend        Boolean?
-  isPin              Boolean?
+  isPin              Boolean?             @default(false)
   mallName           String?              @db.VarChar(50)
   topOrBottom        Int?
-  User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "archive_user_id_fk")
+  productUrl         String?              @db.VarChar(500)
+  faviconUrl         String?              @db.VarChar(500)
+  User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_user_id_fk")
   AllCloset_Category AllCloset_Category[]
 }
 
