@@ -5,53 +5,83 @@ import extensionService from "../service/extensionService";
 
 //* 전체 옷장에 저장
 const toAllCloset = async (req: Request, res: Response) => {
-    const { productUrl, image, mallName, productName, size, isRecommend, faviconUrl } = req.body;
-    
-    const data = await extensionService
-                        .toAllCloset(
-                            productUrl, 
-                            image, 
-                            mallName, 
-                            productName, 
-                            size,
-                            isRecommend, 
-                            faviconUrl,
-                            //userId
-                        );
+  const {
+    productUrl,
+    image,
+    mallName,
+    productName,
+    size,
+    isRecommend,
+    faviconUrl,
+    userId,
+  } = req.body;
 
-    if (!data) {
-        return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.TOALLCLOSET_FAIL));
-    }
-    return res.status(sc.CREATED).send(success(sc.CREATED, rm.TOALLCLOSET_SUCCESS, data));
-}
+  const data = await extensionService.toAllCloset(
+    productUrl,
+    image,
+    mallName,
+    productName,
+    size,
+    isRecommend,
+    faviconUrl,
+    userId
+  );
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.TOALLCLOSET_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.TOALLCLOSET_SUCCESS, data));
+};
 
 //* 비교 사이즈 수동 입력
 const inputSize = async (req: Request, res: Response) => {
-    const {isManual, manualInputNum, topOrBottom, size, topLength, shoulder, chest, isWidthOfTop, bottomLength, waist, thigh, rise, hem, isWidthOfBottom} = req.body;
+  const {
+    isManual,
+    manualInputNum,
+    topOrBottom,
+    size,
+    topLength,
+    shoulder,
+    chest,
+    isWidthOfTop,
+    bottomLength,
+    waist,
+    thigh,
+    rise,
+    hem,
+    isWidthOfBottom,
+  } = req.body;
 
-    const data = await extensionService
-                        .inputSize(
-                            isManual,
-                            manualInputNum,
-                            topOrBottom,
-                            size, 
-                            topLength, 
-                            shoulder, 
-                            chest, 
-                            isWidthOfTop, 
-                            bottomLength, 
-                            waist, 
-                            thigh, 
-                            rise, 
-                            hem, 
-                            isWidthOfBottom
-                        );
+  const data = await extensionService.inputSize(
+    isManual,
+    manualInputNum,
+    topOrBottom,
+    size,
+    topLength,
+    shoulder,
+    chest,
+    isWidthOfTop,
+    bottomLength,
+    waist,
+    thigh,
+    rise,
+    hem,
+    isWidthOfBottom
+  );
 
-    if (!data) {
-        return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.INPUT_MANUALLY_FAIL));
-    }
-    return res.status(sc.CREATED).send(success(sc.CREATED, rm.INPUT_MANUALLY_SUCCESS, data));
-}
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.INPUT_MANUALLY_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.INPUT_MANUALLY_SUCCESS, data));
+};
 
 const extensionController = {
   toAllCloset,
