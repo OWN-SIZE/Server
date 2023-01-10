@@ -21,6 +21,15 @@ const getMyPage = async () => {
 const getRecCount = async () => {
   const recCount = await prisma.recommend.count();
 
+  const updateRecommend = await prisma.recommend.updateMany({
+    where: {
+      recommendSize: null,
+    },
+    data: {
+      recommendSize: "-",
+    },
+  });
+
   const recData = await prisma.recommend.findMany();
 
   const data = {
