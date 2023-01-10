@@ -15,7 +15,7 @@ const updateCloset = async (req: Request, res: Response) => {
   const { productName, size, memo, isPin } = req.body;
   const { productId } = req.params;
 
-  if (!productId || (!productName && !size && !memo && !isPin)) {
+  if (!productId && (!productName || !size || !memo || !isPin)) {
     return res
       .status(sc.BAD_REQUEST)
       .send(fail(sc.BAD_REQUEST, rm.ALLCLOSET_INFO_ERROR));
@@ -49,6 +49,29 @@ const deleteCloset = async (req: Request, res: Response) => {
   return res.status(sc.OK).send(success(sc.OK, rm.DELETE_ALLCLOSET_SUCCESS));
 };
 
+//* 포함된 카테고리 id 조회
+const getIncludingId = async (req: Request, res: Response) => {
+  const { productId } = req.params;
+
+  if (!productId) {
+    return res
+    .status(sc.BAD_REQUEST)
+    .send(fail(sc.BAD_REQUEST, rm.PRODUCTID_INFO_ERROR));
+  }
+
+  const data = await closetService.getIncludingId(+productId);
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.READ_INCLUDINGID_FAIL));
+  }
+
+  return res
+    .status(sc.OK)
+    .send(success(sc.OK, rm.READ_INCLUDINGID_SUCCESS, data));
+}
+
 //* 카테고리에 의류 추가
 const toCategory = async (req: Request, res: Response) => {
   const { productId, categoryId } = req.body;
@@ -76,6 +99,7 @@ const closetController = {
   getAllCloset,
   updateCloset,
   deleteCloset,
+  getIncludingId,
   toCategory
 };
 
