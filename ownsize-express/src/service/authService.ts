@@ -12,7 +12,7 @@ const register = async (email: string, name: string) => {
     },
     process.env.JWT_SECRET
   );
-  console.log("JWT token: ", token);
+
   // DB에 저장된 사람이라면 DB에 JWT token만 업데이트를 해주고,
   // DB에 없다면 JWT 토큰을 만들어주고 돌려준다.
   const user = await prisma.user.upsert({
@@ -30,8 +30,12 @@ const register = async (email: string, name: string) => {
     return null;
   }
 
-  // 생성된 토큰 data를 리턴
-  return token;
+  // 생성된 토큰과 userId를 리턴
+  const data = {
+    userId: user.id,
+    token: token,
+  };
+  return data;
 };
 
 const authService = {

@@ -9,8 +9,7 @@ require("dotenv").config();
 //* 회원가입 및 로그인
 const register = async (req: Request, res: Response) => {
   const { email, name } = req.body;
-  console.log("email: ", email);
-  console.log("name: ", name);
+
   const data = await authService.register(email, name);
 
   if (!data) {
