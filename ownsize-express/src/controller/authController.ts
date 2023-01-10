@@ -8,17 +8,10 @@ require("dotenv").config();
 
 //* 회원가입 및 로그인
 const register = async (req: Request, res: Response) => {
-  const code = req.body.code;
-  const idToken = req.body.credentials;
-  console.log("idToken:", idToken);
-
-  // const client = new OAuth2Client(
-  //   process.env.CLIENT_ID,
-  //   process.env.CLIENT_SECRET,
-  //   process.env.REDIRECT_URL
-  // );
-
-  const data = await authService.register(code);
+  const { email, name } = req.body;
+  console.log("email: ", email);
+  console.log("name: ", name);
+  const data = await authService.register(email, name);
 
   if (!data) {
     //JWT 토큰 안만들어진 경우
