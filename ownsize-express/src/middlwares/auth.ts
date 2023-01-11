@@ -44,7 +44,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     //해당 email이 없는 경우
     return res.status(sc.UNAUTHORIZED).send(fail(sc.UNAUTHORIZED, rm.NO_USER));
   }
-
+  //console.log("email: ", email);
+  //console.log("userId: ", result.id);
   req.body.userId = result.id;
   next();
 };
