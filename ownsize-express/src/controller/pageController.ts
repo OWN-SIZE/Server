@@ -5,7 +5,9 @@ import { success, fail } from "../constants/response";
 
 //* 마이페이지 조회
 const getMyPage = async (req: Request, res: Response) => {
-  const data = await pageService.getMyPage();
+  const { userId } = req.body; //jwt 토큰 확인 후 오는 userId
+
+  const data = await pageService.getMyPage(+userId);
 
   if (!data) {
     return res
@@ -17,7 +19,9 @@ const getMyPage = async (req: Request, res: Response) => {
 
 //* 사이즈 추천 기록 조회
 const getRecCount = async (req: Request, res: Response) => {
-  const data = await pageService.getRecCount();
+  const { userId } = req.body;
+
+  const data = await pageService.getRecCount(+userId);
 
   if (!data) {
     return res

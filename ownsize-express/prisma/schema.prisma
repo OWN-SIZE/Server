@@ -10,7 +10,7 @@ datasource db {
 model User {
   id        Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
   name      String?     @db.VarChar(10)
-  email     String?     @unique @db.VarChar(50)
+  email     String      @unique @db.VarChar(50)
   userImage String?     @db.VarChar(500)
   token     String?     @db.VarChar(500)
   AllCloset AllCloset[]
@@ -35,20 +35,31 @@ model AllCloset {
 }
 
 model AllSizeBottom {
-  id     Int     @id @unique @default(autoincrement())
-  size   String? @db.VarChar(10)
-  length Int?
-  waist  Int?
-  thigh  Int?
-  rise   Int?
+  id              Int      @id @unique @default(autoincrement())
+  size            String?  @db.VarChar(10)
+  bottomLength    Int?
+  waist           Int?
+  thigh           Int?
+  rise            Int?
+  hem             Int?
+  isWidthOfBottom Boolean?
+  isManual        Boolean?
+  topOrBottom     Int?
+  manualInputNum  Int?
+  bottomItemId    Int?
 }
 
 model AllSizeTop {
-  id       Int     @id @unique @default(autoincrement())
-  size     String? @db.VarChar(10)
-  length   Int?
-  shoulder Int?
-  chest    Int?
+  id             Int      @id @unique @default(autoincrement())
+  size           String?  @db.VarChar(10)
+  topLength      Int?
+  shoulder       Int?
+  chest          Int?
+  isWidthOfTop   Boolean?
+  isManual       Boolean?
+  topOrBottom    Int?
+  manualInputNum Int?
+  topItemId      Int?
 }
 
 model MySize {
@@ -88,5 +99,7 @@ model Recommend {
   userId        Int     @default(autoincrement())
   url           String? @db.VarChar(200)
   recommendSize String? @db.VarChar(10)
+  topItemId     Int?
+  bottomItemId  Int?
   User          User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recommend_user_id_fk")
 }
