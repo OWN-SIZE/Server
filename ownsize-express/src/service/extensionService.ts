@@ -13,7 +13,6 @@ const toAllCloset = async (
     faviconUrl: string,
     userId: number
 ) => {
-    
     const data = await prisma.allCloset.create({
         data: {
           userId: userId,
@@ -29,14 +28,14 @@ const toAllCloset = async (
     
       if (isRecommend) {
         //isRecommend T이면 Recommend 테이블 내용 추가
-        const rec = await prisma.recommend.create({
+        await prisma.recommend.create({
           data: {
             userId: userId,
             url: productUrl,
             recommendSize: size,
           },
         });
-      }
+    }
     return data;
 };
 
