@@ -11,19 +11,32 @@ const toAllCloset = async (
     size: string,
     isRecommend: boolean,
     faviconUrl: string,
+    userId: number
 ) => {
+    
     const data = await prisma.allCloset.create({
         data: {
-            //userId: userId,
-            productUrl: productUrl,
-            image: image,
-            mallName: mallName,
-            productName: productName,
-            size: size,
-            isRecommend: isRecommend,
-            faviconUrl: faviconUrl
-        }
-    });
+          userId: userId,
+          productUrl: productUrl,
+          image: image,
+          mallName: mallName,
+          productName: productName,
+          size: size,
+          isRecommend: isRecommend,
+          faviconUrl: faviconUrl,
+        },
+      });
+    
+      if (isRecommend) {
+        //isRecommend T이면 Recommend 테이블 내용 추가
+        const rec = await prisma.recommend.create({
+          data: {
+            userId: userId,
+            url: productUrl,
+            recommendSize: size,
+          },
+        });
+      }
     return data;
 };
 

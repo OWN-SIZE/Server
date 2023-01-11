@@ -5,7 +5,7 @@ import extensionService from "../service/extensionService";
 
 //* 전체 옷장에 저장
 const toAllCloset = async (req: Request, res: Response) => {
-    const { productUrl, image, mallName, productName, size, isRecommend, faviconUrl } = req.body;
+    const { productUrl, image, mallName, productName, size, isRecommend, faviconUrl, userId } = req.body;
     
     const data = await extensionService
                         .toAllCloset(
@@ -16,7 +16,7 @@ const toAllCloset = async (req: Request, res: Response) => {
                             size,
                             isRecommend, 
                             faviconUrl,
-                            //userId
+                            userId
                         );
 
     if (!data) {
@@ -39,7 +39,7 @@ const saveBest = async (req: Request, res: Response) => {
     
     if (!data) {
         return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.BESTSIZE_SAVE_FAIL));
-      }
+    }
 
     return res
         .status(sc.CREATED)
