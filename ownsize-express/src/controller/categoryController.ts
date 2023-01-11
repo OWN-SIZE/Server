@@ -36,15 +36,15 @@ const deleteCategory = async (req: Request, res: Response) => {
 //* 카테고리 수정
 const updateCategory = async (req: Request, res: Response) => {
   const { categoryId } = req.params;
-  const { categoryName } = req.body;
+  const { categoryName, isPinCategory } = req.body;
 
-  if (!categoryId || !categoryName) {
+  if (!categoryId && (!categoryName || !isPinCategory)) {
     return res
       .status(sc.BAD_REQUEST)
       .send(fail(sc.BAD_REQUEST, rm.UPDATE_INFO_ERROR));
   }
 
-  const data = await categoryService.updateCategory(+categoryId, categoryName);
+  const data = await categoryService.updateCategory(+categoryId, categoryName, isPinCategory);
 
   if (!data) {
     return res

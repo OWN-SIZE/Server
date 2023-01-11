@@ -43,13 +43,18 @@ const deleteCategory = async (categoryId: number) => {
 };
 
 //* 카테고리 수정
-const updateCategory = async (categoryId: number, categoryName: string) => {
+const updateCategory = async (
+  categoryId: number, 
+  categoryName?: string, 
+  isPinCategory?: boolean
+  ) => {
   const data = await prisma.category.update({
     where: {
       id: categoryId,
     },
     data: {
       categoryName: categoryName,
+      isPinCategory: isPinCategory
     },
   });
   return data;
