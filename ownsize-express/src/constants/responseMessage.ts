@@ -73,6 +73,11 @@ export default {
   // 익스텐션
   TOALLCLOSET_SUCCESS: "전체 옷장에 저장 성공",
   TOALLCLOSET_FAIL: "전체 옷장에 저장 실패",
+  BESTSIZE_INFO_ERROR: "사이즈 추천 도출 위한 정보 확인",
+  BESTSIZE_OUTPUT_SUCCESS: "추천 사이즈 조회 성공",
+  BESTSIZE_OUTPUT_FAIL: "추천 사이즈 조회 실패",
+  BESTSIZE_SAVE_SUCCESS: "사이즈 추천 결과 저장 성공",
+  BESTSIZE_SAVE_FAIL: "사이즈 추천 결과 저장 실패",
   INPUT_MANUALLY_SUCCESS: "비교 사이즈 수동입력 성공",
   INPUT_MANUALLY_FAIL: "비교 사이즈 수동입력 실패",
 
