@@ -32,15 +32,15 @@ const updateCloset = async (
 
 //* 전체 옷장 의류 정보 삭제
 const deleteCloset = async (productId: number) => {
-  await prisma.allCloset.delete({
-    where: {
-      id: productId,
-    },
-  });
   await prisma.allCloset_Category.deleteMany({
     where: {
       productId: productId,
     }
+  });
+  await prisma.allCloset.delete({
+    where: {
+      id: productId,
+    },
   });
 };
 
