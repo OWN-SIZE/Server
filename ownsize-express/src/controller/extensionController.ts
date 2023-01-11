@@ -6,47 +6,47 @@ import extensionService from "../service/extensionService";
 //* 전체 옷장에 저장
 const toAllCloset = async (req: Request, res: Response) => {
     const {
-        productUrl,
-        image,
-        mallName,
-        productName,
-        size,
-        isRecommend,
-        faviconUrl,
-        userId,
-      } = req.body;
-    
-      const data = await extensionService.toAllCloset(
-        productUrl,
-        image,
-        mallName,
-        productName,
-        size,
-        isRecommend,
-        faviconUrl,
-        userId
-      );
-
-      if (!data) {
-        return res
-          .status(sc.NOT_FOUND)
-          .send(fail(sc.NOT_FOUND, rm.TOALLCLOSET_FAIL));
-      }
+      productUrl,
+      image,
+      mallName,
+      productName,
+      size,
+      isRecommend,
+      faviconUrl,
+      userId,
+    } = req.body;
+  
+    const data = await extensionService.toAllCloset(
+      productUrl,
+      image,
+      mallName,
+      productName,
+      size,
+      isRecommend,
+      faviconUrl,
+      userId
+    );
+  
+    if (!data) {
       return res
-        .status(sc.CREATED)
-        .send(success(sc.CREATED, rm.TOALLCLOSET_SUCCESS, data));
-    };
-
+        .status(sc.NOT_FOUND)
+        .send(fail(sc.NOT_FOUND, rm.TOALLCLOSET_FAIL));
+    }
+    return res
+      .status(sc.CREATED)
+      .send(success(sc.CREATED, rm.TOALLCLOSET_SUCCESS, data));
+  };
+  
 
 //* 사이즈 추천 결과 저장
 const saveBest = async (req: Request, res: Response) => {
     const {userId, topOrBottom, url, topItemId, bottomItemId} = req.body;
 
-    // if (!userId || !topOrBottom) {
-    //     return res
-    //     .status(sc.BAD_REQUEST)
-    //     .send(fail(sc.BAD_REQUEST, rm.BESTSIZE_INFO_ERROR));
-    //   }
+    if (!userId || !topOrBottom || !url || (!topItemId || !bottomItemId)) {
+        return res
+        .status(sc.BAD_REQUEST)
+        .send(fail(sc.BAD_REQUEST, rm.BESTSIZE_INFO_ERROR));
+      }
     
     const data = await extensionService.saveBest(+userId, topOrBottom, url, +topItemId, +bottomItemId);
     
