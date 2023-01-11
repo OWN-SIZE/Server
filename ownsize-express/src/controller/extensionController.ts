@@ -25,6 +25,27 @@ const toAllCloset = async (req: Request, res: Response) => {
     return res.status(sc.CREATED).send(success(sc.CREATED, rm.TOALLCLOSET_SUCCESS, data));
 }
 
+//* 사이즈 추천 결과 저장
+const saveBest = async (req: Request, res: Response) => {
+    const {userId, topOrBottom, url, topItemId, bottomItemId} = req.body;
+
+    // if (!userId || !topOrBottom) {
+    //     return res
+    //     .status(sc.BAD_REQUEST)
+    //     .send(fail(sc.BAD_REQUEST, rm.BESTSIZE_INFO_ERROR));
+    //   }
+    
+    const data = await extensionService.saveBest(+userId, topOrBottom, url, +topItemId, +bottomItemId);
+    
+    if (!data) {
+        return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.BESTSIZE_SAVE_FAIL));
+      }
+
+    return res
+        .status(sc.CREATED)
+        .send(success(sc.CREATED, rm.BESTSIZE_SAVE_SUCCESS, data));
+}
+
 //* 비교 사이즈 수동 입력
 const inputSize = async (req: Request, res: Response) => {
     const {isManual, manualInputNum, topOrBottom, size, topLength, shoulder, chest, isWidthOfTop, bottomLength, waist, thigh, rise, hem, isWidthOfBottom} = req.body;
@@ -56,6 +77,7 @@ const inputSize = async (req: Request, res: Response) => {
 const extensionController = {
   toAllCloset,
   inputSize,
+  saveBest,
 };
 
 export default extensionController;
