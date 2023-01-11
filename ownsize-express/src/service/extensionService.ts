@@ -12,32 +12,32 @@ const toAllCloset = async (
     isRecommend: boolean,
     faviconUrl: string,
     userId: number
-) => {
+  ) => {
     const data = await prisma.allCloset.create({
+      data: {
+        userId: userId,
+        productUrl: productUrl,
+        image: image,
+        mallName: mallName,
+        productName: productName,
+        size: size,
+        isRecommend: isRecommend,
+        faviconUrl: faviconUrl,
+      },
+    });
+  
+    if (isRecommend) {
+      //isRecommend T이면 Recommend 테이블 내용 추가
+      await prisma.recommend.create({
         data: {
           userId: userId,
-          productUrl: productUrl,
-          image: image,
-          mallName: mallName,
-          productName: productName,
-          size: size,
-          isRecommend: isRecommend,
-          faviconUrl: faviconUrl,
+          url: productUrl,
+          recommendSize: size,
         },
       });
-    
-      if (isRecommend) {
-        //isRecommend T이면 Recommend 테이블 내용 추가
-        await prisma.recommend.create({
-          data: {
-            userId: userId,
-            url: productUrl,
-            recommendSize: size,
-          },
-        });
     }
     return data;
-};
+  };
 
 //* 사이즈 추천 결과 저장
 const saveBest = async (
