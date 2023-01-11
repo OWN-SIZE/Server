@@ -10,7 +10,7 @@ datasource db {
 model User {
   id        Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
   name      String?     @db.VarChar(10)
-  email     String?     @unique @db.VarChar(50)
+  email     String      @unique @db.VarChar(50)
   userImage String?     @db.VarChar(500)
   token     String?     @db.VarChar(500)
   AllCloset AllCloset[]
@@ -64,7 +64,7 @@ model AllSizeTop {
 
 model MySize {
   id              Int      @id @unique @default(autoincrement())
-  userId          Int      @default(autoincrement())
+  userId          Int      @unique @default(autoincrement())
   topLength       Int?
   shoulder        Int?
   chest           Int?
@@ -75,7 +75,6 @@ model MySize {
   rise            Int?
   hem             Int?
   isWidthOfBottom Boolean?
-  topOrBottom     Int?
 }
 
 model Category {

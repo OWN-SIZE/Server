@@ -51,10 +51,7 @@ const saveBest = async (
     // 초기사이즈 배열에 넣기
     const MyTopSize = await prisma.mySize.findMany({
         where: {
-            AND : [
-            {userId: userId},
-            {topOrBottom: topOrBottom}
-            ]
+            userId: userId
         },
         select: {
             shoulder: true,
@@ -64,10 +61,7 @@ const saveBest = async (
 
     const MyBottomSize = await prisma.mySize.findMany({
         where: {
-            AND : [
-            {userId: userId},
-            {topOrBottom: topOrBottom}
-            ]
+            userId: userId
         },
         select: {
             bottomLength: true,
