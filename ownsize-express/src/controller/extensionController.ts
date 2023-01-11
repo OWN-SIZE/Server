@@ -37,6 +37,53 @@ const toAllCloset = async (req: Request, res: Response) => {
       .send(success(sc.CREATED, rm.TOALLCLOSET_SUCCESS, data));
   };
   
+//* 크롤링한 사이즈표 저장
+const saveCrawling = async (req: Request, res: Response) => {
+    const { isManual, 
+            manualInputNum ,
+            topOrBottom,
+            size,
+            topItemId,
+            topLength,
+            shoulder,
+            chest,
+            isWidthOfTop,
+            bottomItemId,
+            bottomLength,
+            waist,
+            thigh,
+            rise,
+            hem,
+            isWidthOfBottom } = req.body;
+    
+    const data = await extensionService.saveCrawling(
+        isManual,
+        manualInputNum,
+        topOrBottom,
+        size,
+        +topItemId,
+        topLength,
+        shoulder,
+        chest,
+        isWidthOfTop,
+        bottomItemId,
+        bottomLength,
+        waist,
+        thigh,
+        rise,
+        hem,
+        isWidthOfBottom
+    );
+
+    if (!data) {
+        return res
+          .status(sc.NOT_FOUND)
+          .send(fail(sc.NOT_FOUND, rm.CRAWLING_SAVE_FAIL));
+      }
+      return res
+        .status(sc.CREATED)
+        .send(success(sc.CREATED, rm.CRAWLING_SAVE_SUCCESS, data));
+}
 
 //* 사이즈 추천 결과 저장
 const saveBest = async (req: Request, res: Response) => {
@@ -91,6 +138,7 @@ const extensionController = {
   toAllCloset,
   inputSize,
   saveBest,
+  saveCrawling
 };
 
 export default extensionController;

@@ -6,8 +6,8 @@ const router: Router = Router();
 //* 전체 옷장에 저장 POST /extension/toAllCloset
 router.post("/toAllCloset", extensionController.toAllCloset);
 
-//* 사이즈 추천 결과 조회 GET /extension/bestSize
-
+//* 크롤링한 사이즈표 저장 POST /extension/saveCrawling
+router.post("/saveCrawling", extensionController.saveCrawling);
 
 //* 사이즈 추천 결과 저장 POST /extension/saveBest
 router.post("/saveBest", extensionController.saveBest);
