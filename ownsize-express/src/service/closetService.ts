@@ -37,6 +37,11 @@ const deleteCloset = async (productId: number) => {
       id: productId,
     },
   });
+  await prisma.allCloset_Category.deleteMany({
+    where: {
+      productId: productId,
+    }
+  });
 };
 
 //* 포함된 카테고리 id 조회
