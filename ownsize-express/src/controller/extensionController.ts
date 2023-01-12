@@ -5,140 +5,172 @@ import extensionService from "../service/extensionService";
 
 //* 전체 옷장에 저장
 const toAllCloset = async (req: Request, res: Response) => {
-    const {
-      productUrl,
-      image,
-      mallName,
-      productName,
-      size,
-      isRecommend,
-      faviconUrl,
-      userId,
-    } = req.body;
-  
-    const data = await extensionService.toAllCloset(
-      productUrl,
-      image,
-      mallName,
-      productName,
-      size,
-      isRecommend,
-      faviconUrl,
-      userId
-    );
-  
-    if (!data) {
-      return res
-        .status(sc.NOT_FOUND)
-        .send(fail(sc.NOT_FOUND, rm.TOALLCLOSET_FAIL));
-    }
+  const {
+    productUrl,
+    image,
+    mallName,
+    productName,
+    size,
+    isRecommend,
+    faviconUrl,
+    userId,
+  } = req.body;
+
+  const data = await extensionService.toAllCloset(
+    productUrl,
+    image,
+    mallName,
+    productName,
+    size,
+    isRecommend,
+    faviconUrl,
+    +userId
+  );
+
+  if (!data) {
     return res
-      .status(sc.CREATED)
-      .send(success(sc.CREATED, rm.TOALLCLOSET_SUCCESS, data));
-  };
-  
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.TOALLCLOSET_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.TOALLCLOSET_SUCCESS, data));
+};
+
 //* 크롤링한 사이즈표 저장
 const saveCrawling = async (req: Request, res: Response) => {
-    const { isManual, 
-            manualInputNum ,
-            topOrBottom,
-            size,
-            topItemId,
-            topLength,
-            shoulder,
-            chest,
-            isWidthOfTop,
-            bottomItemId,
-            bottomLength,
-            waist,
-            thigh,
-            rise,
-            hem,
-            isWidthOfBottom } = req.body;
-    
-    const data = await extensionService.saveCrawling(
-        isManual,
-        manualInputNum,
-        topOrBottom,
-        size,
-        +topItemId,
-        topLength,
-        shoulder,
-        chest,
-        isWidthOfTop,
-        bottomItemId,
-        bottomLength,
-        waist,
-        thigh,
-        rise,
-        hem,
-        isWidthOfBottom
-    );
+  const {
+    isManual,
+    manualInputNum,
+    topOrBottom,
+    size,
+    topItemId,
+    topLength,
+    shoulder,
+    chest,
+    isWidthOfTop,
+    bottomItemId,
+    bottomLength,
+    waist,
+    thigh,
+    rise,
+    hem,
+    isWidthOfBottom,
+    userId,
+  } = req.body;
 
-    if (!data) {
-        return res
-          .status(sc.NOT_FOUND)
-          .send(fail(sc.NOT_FOUND, rm.CRAWLING_SAVE_FAIL));
-      }
-      return res
-        .status(sc.CREATED)
-        .send(success(sc.CREATED, rm.CRAWLING_SAVE_SUCCESS, data));
-}
+  const data = await extensionService.saveCrawling(
+    isManual,
+    manualInputNum,
+    topOrBottom,
+    size,
+    +topItemId,
+    topLength,
+    shoulder,
+    chest,
+    isWidthOfTop,
+    bottomItemId,
+    bottomLength,
+    waist,
+    thigh,
+    rise,
+    hem,
+    isWidthOfBottom,
+    +userId
+  );
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.CRAWLING_SAVE_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.CRAWLING_SAVE_SUCCESS, data));
+};
 
 //* 사이즈 추천 결과 저장
 const saveBest = async (req: Request, res: Response) => {
-    const {userId, topOrBottom, url, topItemId, bottomItemId} = req.body;
+  const { userId, topOrBottom, url, topItemId, bottomItemId } = req.body;
 
-    if (!userId || !topOrBottom || !url || (!topItemId || !bottomItemId)) {
-        return res
-        .status(sc.BAD_REQUEST)
-        .send(fail(sc.BAD_REQUEST, rm.BESTSIZE_INFO_ERROR));
-      }
-    
-    const data = await extensionService.saveBest(+userId, topOrBottom, url, +topItemId, +bottomItemId);
-    
-    if (!data) {
-        return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.BESTSIZE_SAVE_FAIL));
-    }
-
+  if ((!userId || !topOrBottom || !url) && !topItemId && !bottomItemId) {
     return res
-        .status(sc.CREATED)
-        .send(success(sc.CREATED, rm.BESTSIZE_SAVE_SUCCESS, data));
-}
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.BESTSIZE_INFO_ERROR));
+  }
+
+  const data = await extensionService.saveBest(
+    +userId,
+    topOrBottom,
+    url,
+    +topItemId,
+    +bottomItemId
+  );
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.BESTSIZE_SAVE_FAIL));
+  }
+
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.BESTSIZE_SAVE_SUCCESS, data));
+};
 
 //* 비교 사이즈 수동 입력
 const inputSize = async (req: Request, res: Response) => {
-    const {isManual, manualInputNum, topOrBottom, size, topLength, shoulder, chest, isWidthOfTop, bottomLength, waist, thigh, rise, hem, isWidthOfBottom} = req.body;
+  const {
+    isManual,
+    manualInputNum,
+    topOrBottom,
+    size,
+    topLength,
+    shoulder,
+    chest,
+    isWidthOfTop,
+    bottomLength,
+    waist,
+    thigh,
+    rise,
+    hem,
+    isWidthOfBottom,
+    userId,
+  } = req.body;
 
-    const data = await extensionService
-                        .inputSize(
-                            isManual,
-                            manualInputNum,
-                            topOrBottom,
-                            size, 
-                            topLength, 
-                            shoulder, 
-                            chest, 
-                            isWidthOfTop, 
-                            bottomLength, 
-                            waist, 
-                            thigh, 
-                            rise, 
-                            hem, 
-                            isWidthOfBottom
-                        );
+  const data = await extensionService.inputSize(
+    isManual,
+    manualInputNum,
+    topOrBottom,
+    size,
+    topLength,
+    shoulder,
+    chest,
+    isWidthOfTop,
+    bottomLength,
+    waist,
+    thigh,
+    rise,
+    hem,
+    isWidthOfBottom,
+    +userId
+  );
 
-    if (!data) {
-        return res.status(sc.NOT_FOUND).send(fail(sc.NOT_FOUND, rm.INPUT_MANUALLY_FAIL));
-    }
-    return res.status(sc.CREATED).send(success(sc.CREATED, rm.INPUT_MANUALLY_SUCCESS, data));
-}
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.INPUT_MANUALLY_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.INPUT_MANUALLY_SUCCESS, data));
+};
 
 const extensionController = {
   toAllCloset,
   inputSize,
   saveBest,
-  saveCrawling
+  saveCrawling,
 };
 
 export default extensionController;
