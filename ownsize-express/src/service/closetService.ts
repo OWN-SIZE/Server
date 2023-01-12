@@ -2,8 +2,13 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 //* 전체 옷장 조회
-const getAllCloset = async () => {
-  const data = await prisma.allCloset.findMany();
+const getAllCloset = async (userId: number) => {
+  const data = await prisma.allCloset.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+
   return data;
 };
 
@@ -35,7 +40,7 @@ const deleteCloset = async (productId: number) => {
   await prisma.allCloset_Category.deleteMany({
     where: {
       productId: productId,
-    }
+    },
   });
   await prisma.allCloset.delete({
     where: {
