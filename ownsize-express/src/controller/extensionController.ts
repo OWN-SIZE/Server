@@ -39,45 +39,9 @@ const toAllCloset = async (req: Request, res: Response) => {
 
 //* 크롤링한 사이즈표 저장
 const saveCrawling = async (req: Request, res: Response) => {
-  const {
-    isManual,
-    manualInputNum,
-    topOrBottom,
-    size,
-    topItemId,
-    topLength,
-    shoulder,
-    chest,
-    isWidthOfTop,
-    bottomItemId,
-    bottomLength,
-    waist,
-    thigh,
-    rise,
-    hem,
-    isWidthOfBottom,
-    userId,
-  } = req.body;
+  const sizes = req.body.sizes;
 
-  const data = await extensionService.saveCrawling(
-    isManual,
-    manualInputNum,
-    topOrBottom,
-    size,
-    +topItemId,
-    topLength,
-    shoulder,
-    chest,
-    isWidthOfTop,
-    bottomItemId,
-    bottomLength,
-    waist,
-    thigh,
-    rise,
-    hem,
-    isWidthOfBottom,
-    +userId
-  );
+  const data = await extensionService.saveCrawling(sizes);
 
   if (!data) {
     return res
