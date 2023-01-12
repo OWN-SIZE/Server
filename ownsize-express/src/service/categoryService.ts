@@ -49,7 +49,6 @@ const getAllCategory = async (userId: number) => {
 const createCategory = async (
   categoryName: string,
   isPinCategory: boolean,
-  image: string[],
   userId: number
 ) => {
   const data = await prisma.category.create({
@@ -57,7 +56,6 @@ const createCategory = async (
       userId: userId,
       categoryName: categoryName,
       isPinCategory: isPinCategory,
-      image: image,
     },
   });
 
