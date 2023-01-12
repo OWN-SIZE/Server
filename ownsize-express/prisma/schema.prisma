@@ -8,14 +8,16 @@ datasource db {
 }
 
 model User {
-  id        Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
-  name      String?     @db.VarChar(10)
-  email     String      @unique @db.VarChar(50)
-  userImage String?     @db.VarChar(500)
-  token     String?     @db.VarChar(500)
-  AllCloset AllCloset[]
-  Category  Category[]
-  Recommend Recommend[]
+  id            Int             @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
+  name          String?         @db.VarChar(10)
+  email         String          @unique @db.VarChar(50)
+  userImage     String?         @db.VarChar(500)
+  token         String?         @db.VarChar(500)
+  AllCloset     AllCloset[]
+  AllSizeBottom AllSizeBottom[]
+  AllSizeTop    AllSizeTop[]
+  Category      Category[]
+  Recommend     Recommend[]
 }
 
 model AllCloset {
@@ -30,6 +32,7 @@ model AllCloset {
   mallName           String?              @db.VarChar(50)
   productUrl         String?              @db.VarChar(500)
   faviconUrl         String?              @db.VarChar(500)
+  createdAt          String?              @db.VarChar(20)
   User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_user_id_fk")
   AllCloset_Category AllCloset_Category[]
 }
@@ -47,6 +50,8 @@ model AllSizeBottom {
   topOrBottom     Int?
   manualInputNum  Int?
   bottomItemId    Int?
+  userId          Int      @default(autoincrement())
+  User            User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allsizebottom_user_id_fk")
 }
 
 model AllSizeTop {
@@ -60,6 +65,8 @@ model AllSizeTop {
   topOrBottom    Int?
   manualInputNum Int?
   topItemId      Int?
+  userId         Int      @default(autoincrement())
+  User           User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allsizetop_user_id_fk")
 }
 
 model MySize {

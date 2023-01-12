@@ -4,43 +4,12 @@ const prisma = new PrismaClient();
 
 //* 카테고리 전체 조회
 const getAllCategory = async (userId: number) => {
-  //userId에 해당하는 allCloset 정보 가져옴
-  const allClosetData = await prisma.allCloset.findMany({
-    where: {
-      userId: userId,
-    },
-    select: {
-      id: true,
-    },
-  });
-
-  const productIdArr = [];
-  for (var i = 0; i < allClosetData.length; i++) {
-    productIdArr.push(Object.values(allClosetData[i])[0]);
-  }
-
-  //allCloset 연결된 카테고리 찾기
-  const category = [];
-
-  for (var i = 0; i < productIdArr.length; i++) {
-    const x = await prisma.allCloset_Category.findMany({
-      where: {
-        productId: productIdArr[i],
-      },
-      select: {
-        categoryId: true,
-      },
-    });
-    if (Object.values(x)[0] != undefined) {
-      category.push(Object.values(Object.values(x)[0])[0]);
-    }
-  }
 
   const data = await prisma.category.findMany({
-    where: {
-      id: { in: category },
-    },
-  });
+    where:{
+      userId: userId
+    }
+  })
 
   return data;
 };
@@ -49,7 +18,6 @@ const getAllCategory = async (userId: number) => {
 const createCategory = async (
   categoryName: string,
   isPinCategory: boolean,
-  image: string[],
   userId: number
 ) => {
   const data = await prisma.category.create({
@@ -57,7 +25,6 @@ const createCategory = async (
       userId: userId,
       categoryName: categoryName,
       isPinCategory: isPinCategory,
-      image: image,
     },
   });
 
