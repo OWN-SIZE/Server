@@ -25,27 +25,27 @@ app.use("/", router); // use -> 모든 요청
 // localhost:8000/api/user -> user.ts
 
 //* HTTP method - GET
-// app.get("/", (req: Request, res: Response, next: NextFunction) => {
-//   res.send("마! 이게 서버다!");
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`
-//         #############################################
-//             🛡️ Server listening on port: ${PORT} 🛡️
-//         #############################################
-//     `);
-// }); // 8000 번 포트에서 서버를 실행하겠다!
-
-//* HTTPS method - GET
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("마! 이게 서버다!");
 });
 
-app.listen(HTTPS_PORT, () => {
+app.listen(PORT, () => {
   console.log(`
         #############################################
-            🛡️ Server listening on HTTPS port: ${HTTPS_PORT} 🛡️
+            🛡️ Server listening on port: ${PORT} 🛡️
         #############################################
     `);
-});
+}); // 8000 번 포트에서 서버를 실행하겠다!
+
+//* HTTPS method - GET
+//app.get("/", (req: Request, res: Response, next: NextFunction) => {
+//  res.send("마! 이게 서버다!");
+//});
+//
+//app.listen(HTTPS_PORT, () => {
+//  console.log(`
+//        #############################################
+//            🛡️ Server listening on HTTPS port: ${HTTPS_PORT} 🛡️
+//        #############################################
+//    `);
+//});
