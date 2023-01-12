@@ -42,59 +42,69 @@ const toAllCloset = async (
 
 //* 크롤링한 사이즈표 저장
 const saveCrawling = async (
-  isManual: boolean,
-  manualInputNum: number,
-  topOrBottom: number,
-  size: string,
-  topItemId: number,
-  topLength: number,
-  shoulder: number,
-  chest: number,
-  isWidthOfTop: boolean,
-  bottomItemId: number,
-  bottomLength: number,
-  waist: number,
-  thigh: number,
-  rise: number,
-  hem: number,
-  isWidthOfBottom: boolean,
-  userId: number
+  sizes: [
+    {
+      isManual: boolean,
+      manualInputNum: number,
+      topOrBottom: number,
+      size: string,
+      topItemId: number,
+      topLength: number,
+      shoulder: number,
+      chest: number,
+      isWidthOfTop: boolean,
+      bottomItemId: number,
+      bottomLength: number,
+      waist: number,
+      thigh: number,
+      rise: number,
+      hem: number,
+      isWidthOfBottom: boolean,
+      userId: number
+    }
+  ]
 ) => {
-  if (topOrBottom === 0) {
-    const data = await prisma.allSizeTop.create({
-      data: {
-        userId: userId,
-        isManual: isManual,
-        manualInputNum: manualInputNum,
-        topOrBottom: topOrBottom,
-        size: size,
-        topItemId: topItemId,
-        topLength: topLength,
-        shoulder: shoulder,
-        chest: chest,
-        isWidthOfTop: isWidthOfTop,
-      },
-    });
-    return data;
-  } else if (topOrBottom === 1) {
-    const data = await prisma.allSizeBottom.create({
-      data: {
-        userId: userId,
-        isManual: isManual,
-        manualInputNum: manualInputNum,
-        topOrBottom: topOrBottom,
-        size: size,
-        bottomItemId: bottomItemId,
-        bottomLength: bottomLength,
-        waist: waist,
-        thigh: thigh,
-        rise: rise,
-        hem: hem,
-        isWidthOfBottom: isWidthOfBottom,
-      },
-    });
-    return data;
+  const data1 =[];
+  
+  for (var i = 0; i < sizes.length; i++){
+    if (sizes[i].topOrBottom === 0) {
+      const data = await prisma.allSizeTop.create({
+        data: {
+          userId: sizes[i].userId,
+          isManual: sizes[i].isManual,
+          manualInputNum: sizes[i].manualInputNum,
+          topOrBottom: sizes[i].topOrBottom,
+          size: sizes[i].size,
+          topItemId: sizes[i].topItemId,
+          topLength: sizes[i].topLength,
+          shoulder: sizes[i].shoulder,
+          chest: sizes[i].chest,
+          isWidthOfTop: sizes[i].isWidthOfTop,
+        }
+      });
+      data1.push(data)
+    } 
+    else if (sizes[i].topOrBottom === 1) {
+      const data = await prisma.allSizeBottom.create({
+        data: {
+          userId: sizes[i].userId,
+          isManual: sizes[i].isManual,
+          manualInputNum: sizes[i].manualInputNum,
+          topOrBottom: sizes[i].topOrBottom,
+          size: sizes[i].size,
+          bottomItemId: sizes[i].bottomItemId,
+          bottomLength: sizes[i].bottomLength,
+          waist: sizes[i].waist,
+          thigh: sizes[i].thigh,
+          rise: sizes[i].rise,
+          hem: sizes[i].hem,
+          isWidthOfBottom: sizes[i].isWidthOfBottom,
+        },
+      });
+      data1.push(data)
+    }
   }
+  return data1
 };
 
 //* 사이즈 추천 결과 저장
