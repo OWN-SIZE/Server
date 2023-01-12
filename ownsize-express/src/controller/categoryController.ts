@@ -1,4 +1,3 @@
-import { UnwrapTuple } from '@prisma/client';
 import { Request, Response } from "express";
 import { rm, sc } from "../constants";
 import { success, fail } from "../constants/response";

@@ -1,3 +1,4 @@
+import { UpdateClosetDTO } from '../interfaces/common/AllCloset/updateClosetDto';
 import { Request, Response } from "express";
 import { closetService } from "../service";
 import { rm, sc } from "../constants";
@@ -13,6 +14,7 @@ const getAllCloset = async (req: Request, res: Response) => {
 //* 전체 옷장 내 의류 정보 수정
 const updateCloset = async (req: Request, res: Response) => {
   const { productName, size, memo, isPin } = req.body;
+  //const updateClosetDto : UpdateClosetDTO = req.body;
   const { productId } = req.params;
 
   if (!productId && (!productName || !size || !memo || !isPin)) {
