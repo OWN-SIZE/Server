@@ -15,12 +15,11 @@ const getAllCategory = async (req: Request, res: Response) => {
 
 //* 카테고리 생성
 const createCategory = async (req: Request, res: Response) => {
-  const { categoryName, isPinCategory, image, userId } = req.body;
+  const { categoryName, isPinCategory, userId } = req.body;
 
   const data = await categoryService.createCategory(
     categoryName,
     isPinCategory,
-    image,
     +userId
   );
 
