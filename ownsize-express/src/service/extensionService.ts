@@ -39,6 +39,61 @@ const toAllCloset = async (
     return data;
   };
 
+//* 크롤링한 사이즈표 저장
+const saveCrawling = async (
+    isManual: boolean,
+	manualInputNum: number,
+	topOrBottom: number,
+	size: string,
+	topItemId: number,
+	topLength: number,
+	shoulder: number,
+	chest: number,
+	isWidthOfTop: boolean,
+	bottomItemId: number,
+	bottomLength: number,
+	waist: number,
+	thigh: number,
+	rise: number,
+	hem: number,
+	isWidthOfBottom: boolean
+) => {
+    if (topOrBottom===0) {
+        const data = await prisma.allSizeTop.create({
+            data: {
+                isManual: isManual,
+                manualInputNum: manualInputNum,
+                topOrBottom: topOrBottom,
+                size: size,
+                topItemId: topItemId,
+                topLength: topLength,
+                shoulder:shoulder,
+                chest: chest,
+                isWidthOfTop: isWidthOfTop
+            }
+        })
+        return data;
+    }
+    else if (topOrBottom===1) {
+        const data = await prisma.allSizeBottom.create({
+            data: {
+                isManual: isManual,
+                manualInputNum: manualInputNum,
+                topOrBottom: topOrBottom,
+                size: size,
+                bottomItemId: bottomItemId,
+                bottomLength: bottomLength,
+                waist: waist,
+                thigh: thigh,
+                rise: rise,
+                hem: hem,
+                isWidthOfBottom: isWidthOfBottom
+            }
+        })
+        return data;
+    }
+}
+
 //* 사이즈 추천 결과 저장
 const saveBest = async (
     userId: number,
@@ -380,7 +435,8 @@ const inputSize = async (
 const extensionService = {
     toAllCloset,
     inputSize,
-    saveBest
+    saveBest,
+    saveCrawling
 };
 
 export default extensionService;
