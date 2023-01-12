@@ -5,10 +5,14 @@ import { success, fail } from "../constants/response";
 
 //* 전체 옷장 조회
 const getAllCloset = async (req: Request, res: Response) => {
-  const data = await closetService.getAllCloset();
+  const { userId } = req.body;
 
-  return res.status(sc.OK).send(success(sc.OK, rm.READ_ALLCLOSET_SUCCESS, data));
-}
+  const data = await closetService.getAllCloset(+userId);
+
+  return res
+    .status(sc.OK)
+    .send(success(sc.OK, rm.READ_ALLCLOSET_SUCCESS, data));
+};
 
 //* 전체 옷장 내 의류 정보 수정
 const updateCloset = async (req: Request, res: Response) => {
@@ -55,8 +59,8 @@ const getIncludingId = async (req: Request, res: Response) => {
 
   if (!productId) {
     return res
-    .status(sc.BAD_REQUEST)
-    .send(fail(sc.BAD_REQUEST, rm.PRODUCTID_INFO_ERROR));
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.PRODUCTID_INFO_ERROR));
   }
 
   const data = await closetService.getIncludingId(+productId);
@@ -70,7 +74,7 @@ const getIncludingId = async (req: Request, res: Response) => {
   return res
     .status(sc.OK)
     .send(success(sc.OK, rm.READ_INCLUDINGID_SUCCESS, data));
-}
+};
 
 //* 카테고리에 의류 추가
 const toCategory = async (req: Request, res: Response) => {
@@ -78,8 +82,8 @@ const toCategory = async (req: Request, res: Response) => {
 
   if (!productId || !categoryId) {
     return res
-    .status(sc.BAD_REQUEST)
-    .send(fail(sc.BAD_REQUEST, rm.TOCATEGORY_INFO_ERROR));
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.TOCATEGORY_INFO_ERROR));
   }
 
   const data = await closetService.toCategory(+productId, +categoryId);
@@ -93,14 +97,14 @@ const toCategory = async (req: Request, res: Response) => {
   return res
     .status(sc.CREATED)
     .send(success(sc.CREATED, rm.TOCATEGORY_SUCCESS, data));
-}
+};
 
 const closetController = {
   getAllCloset,
   updateCloset,
   deleteCloset,
   getIncludingId,
-  toCategory
+  toCategory,
 };
 
 export default closetController;
