@@ -3,8 +3,12 @@ import { PrismaClient, UnwrapTuple } from "@prisma/client";
 const prisma = new PrismaClient();
 
 //* 마이 사이즈 조회
-const getMySize = async () => {
-  const data = await prisma.mySize.findMany();
+const getMySize = async (userId: number) => {
+  const data = await prisma.mySize.findMany({
+    where: {
+      userId: userId,
+    },
+  });
 
   return data;
 };
@@ -14,10 +18,19 @@ const inputTopSize = async (
   topLength: number,
   shoulder: number,
   chest: number,
-  isWidthOfTop: boolean
+  isWidthOfTop: boolean,
+  userId: number
 ) => {
-  const data = await prisma.mySize.create({
-    data: {
+  // 정보 이미 있으면 update, 없으면 create
+  const data = await prisma.mySize.upsert({
+    where: { userId: userId },
+    update: {
+      topLength: topLength,
+      shoulder: shoulder,
+      chest: chest,
+      isWidthOfTop: isWidthOfTop,
+    },
+    create: {
       topLength: topLength,
       shoulder: shoulder,
       chest: chest,
@@ -35,10 +48,20 @@ const inputBottomSize = async (
   thigh: number,
   rise: number,
   hem: number,
-  isWidthOfBottom: boolean
+  isWidthOfBottom: boolean,
+  userId: number
 ) => {
-  const data = await prisma.mySize.create({
-    data: {
+  const data = await prisma.mySize.upsert({
+    where: { userId: userId },
+    update: {
+      bottomLength: bottomLength,
+      waist: waist,
+      thigh: thigh,
+      rise: rise,
+      hem: hem,
+      isWidthOfBottom: isWidthOfBottom,
+    },
+    create: {
       bottomLength: bottomLength,
       waist: waist,
       thigh: thigh,
