@@ -15,14 +15,15 @@ const getAllCloset = async (userId: number) => {
 //* 전체 옷장 정보 수정
 const updateCloset = async (
   productId: number,
+  userId: number,
   productName?: string,
   size?: string,
   memo?: string,
   isPin?: boolean
 ) => {
-  const data = await prisma.allCloset.update({
+  await prisma.allCloset.updateMany({
     where: {
-      id: productId,
+      AND: [{ id: productId }, { userId: userId }],
     },
     data: {
       productName: productName,
@@ -31,26 +32,49 @@ const updateCloset = async (
       isPin: isPin,
     },
   });
+  const data = await prisma.allCloset.findMany({
+    where: {
+      AND: [{ id: productId }, { userId: userId }],
+    },
+    select: {
+      id: true,
+      productName: true,
+      size: true,
+      memo: true,
+      mallName: true,
+      isRecommend: true,
+      isPin: true,
+    },
+  });
 
   return data;
 };
 
 //* 전체 옷장 의류 정보 삭제
-const deleteCloset = async (productId: number) => {
+const deleteCloset = async (productId: number, userId: number) => {
   await prisma.allCloset_Category.deleteMany({
     where: {
       productId: productId,
     },
   });
-  await prisma.allCloset.delete({
+  await prisma.allCloset.deleteMany({
     where: {
-      id: productId,
+      AND: [{ id: productId }, { userId: userId }],
     },
   });
 };
 
 //* 포함된 카테고리 id 조회
-const getIncludingId = async (productId: number) => {
+const getIncludingId = async (productId: number, userId: number) => {
+  const data2 = await prisma.allCloset.findMany({
+    where: {
+      AND: [{ id: productId }, { userId: userId }],
+    },
+  });
+  if (!data2) {
+    return null;
+  }
+
   const data = await prisma.allCloset_Category.findMany({
     where: {
       productId: productId,
@@ -70,7 +94,19 @@ const getIncludingId = async (productId: number) => {
 };
 
 //* 카테고리에 의류 추가
-const toCategory = async (productId: number, categoryId: number) => {
+const toCategory = async (
+  productId: number,
+  categoryId: number,
+  userId: number
+) => {
+  const data2 = await prisma.allCloset.findMany({
+    where: {
+      AND: [{ id: productId }, { userId: userId }],
+    },
+  });
+  if (!data2) {
+    return null;
+  }
   const data = await prisma.allCloset_Category.create({
     data: {
       productId: productId,
