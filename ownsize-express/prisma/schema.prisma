@@ -14,6 +14,7 @@ model User {
   userImage String?     @db.VarChar(500)
   token     String?     @db.VarChar(500)
   AllCloset AllCloset[]
+  Category  Category[]
   Recommend Recommend[]
 }
 
@@ -29,7 +30,6 @@ model AllCloset {
   mallName           String?              @db.VarChar(50)
   productUrl         String?              @db.VarChar(500)
   faviconUrl         String?              @db.VarChar(500)
-  isInPin            Boolean              @default(false)
   User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_user_id_fk")
   AllCloset_Category AllCloset_Category[]
 }
@@ -82,13 +82,16 @@ model Category {
   categoryName       String?              @db.VarChar(20)
   isPinCategory      Boolean?
   image              String[]             @db.VarChar
+  userId             Int                  @default(autoincrement())
   AllCloset_Category AllCloset_Category[]
+  User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "category_user_id_fk")
 }
 
 model AllCloset_Category {
   id         Int       @id @unique @default(autoincrement())
   productId  Int       @default(autoincrement())
   categoryId Int       @default(autoincrement())
+  isInPin    Boolean?
   AllCloset  AllCloset @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_allcloset_id_fk")
   Category   Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_category_id_fk")
 }

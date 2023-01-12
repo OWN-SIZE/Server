@@ -3,8 +3,44 @@ import { arrayBuffer } from "stream/consumers";
 const prisma = new PrismaClient();
 
 //* 카테고리 전체 조회
-const getAllCategory = async () => {
-  const data = await prisma.category.findMany();
+const getAllCategory = async (userId: number) => {
+  //userId에 해당하는 allCloset 정보 가져옴
+  const allClosetData = await prisma.allCloset.findMany({
+    where: {
+      userId: userId,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  const productIdArr = [];
+  for (var i = 0; i < allClosetData.length; i++) {
+    productIdArr.push(Object.values(allClosetData[i])[0]);
+  }
+
+  //allCloset 연결된 카테고리 찾기
+  const category = [];
+
+  for (var i = 0; i < productIdArr.length; i++) {
+    const x = await prisma.allCloset_Category.findMany({
+      where: {
+        productId: productIdArr[i],
+      },
+      select: {
+        categoryId: true,
+      },
+    });
+    if (Object.values(x)[0] != undefined) {
+      category.push(Object.values(Object.values(x)[0])[0]);
+    }
+  }
+
+  const data = await prisma.category.findMany({
+    where: {
+      id: { in: category },
+    },
+  });
 
   return data;
 };
@@ -13,10 +49,12 @@ const getAllCategory = async () => {
 const createCategory = async (
   categoryName: string,
   isPinCategory: boolean,
-  image: string[]
+  image: string[],
+  userId: number
 ) => {
   const data = await prisma.category.create({
     data: {
+      userId: userId,
       categoryName: categoryName,
       isPinCategory: isPinCategory,
       image: image,
@@ -27,44 +65,78 @@ const createCategory = async (
 };
 
 //* 카테고리 삭제
-const deleteCategory = async (categoryId: number) => {
-  // category 삭제 전에 중계테이블에 참조된 값 같이 삭제해야함
-  await prisma.allCloset_Category.deleteMany({
+const deleteCategory = async (categoryId: number, userId: number) => {
+  //userId에 해당하는 allCloset 정보 가져옴
+  const allClosetData = await prisma.allCloset.findMany({
     where: {
-      categoryId: categoryId,
+      userId: userId,
+    },
+    select: {
+      id: true,
     },
   });
 
-  await prisma.category.delete({
+  const productIdArr = [];
+  for (var i = 0; i < allClosetData.length; i++) {
+    productIdArr.push(Object.values(allClosetData[i])[0]);
+  }
+
+  // category 삭제 전에 중계테이블에 참조된 값 같이 삭제해야함
+  for (var i = 0; i < productIdArr.length; i++) {
+    await prisma.allCloset_Category.deleteMany({
+      where: {
+        AND: [{ categoryId: categoryId }, { productId: productIdArr[i] }],
+      },
+    });
+  }
+
+  await prisma.category.deleteMany({
     where: {
-      id: categoryId,
+      AND: [{ id: categoryId }, { userId: userId }],
     },
   });
 };
 
 //* 카테고리 수정
 const updateCategory = async (
-  categoryId: number, 
-  categoryName?: string, 
+  categoryId: number,
+  userId: number,
+  categoryName?: string,
   isPinCategory?: boolean
-  ) => {
-  const data = await prisma.category.update({
+) => {
+  const data = await prisma.category.updateMany({
     where: {
-      id: categoryId,
+      AND: [{ id: categoryId }, { userId: userId }],
     },
     data: {
       categoryName: categoryName,
-      isPinCategory: isPinCategory
+      isPinCategory: isPinCategory,
     },
   });
   return data;
 };
 
 //* 카테고리 상세 조회
-const getCategoryById = async (categoryId: number) => {
-  const ProductId = await prisma.allCloset_Category.findMany({
+const getCategoryById = async (categoryId: number, userId: number) => {
+  //userId에 해당하는 allCloset 정보 가져옴
+  const allClosetData = await prisma.allCloset.findMany({
     where: {
-      categoryId: categoryId,
+      userId: userId,
+    },
+    select: {
+      id: true,
+    },
+  });
+  const productIdArr = [];
+  for (var i = 0; i < allClosetData.length; i++) {
+    productIdArr.push(Object.values(allClosetData[i])[0]);
+  }
+
+  const ProductId = await prisma.allCloset_Category.findMany({
+    //해당 userId가 가진 전체 product중 해당 categoryId에 해당하는것만 추림
+    where: {
+      productId: { in: productIdArr },
+      categoryId: { in: categoryId },
     },
     select: {
       productId: true,
@@ -92,18 +164,9 @@ const pinItem = async (
   productId: number,
   isInPin: boolean
 ) => {
-  const ProductId = await prisma.allCloset_Category.findMany({
+  const data = await prisma.allCloset_Category.updateMany({
     where: {
       AND: [{ categoryId: categoryId }, { productId: productId }],
-    },
-    select: {
-      productId: true,
-    },
-  });
-
-  const data = await prisma.allCloset.update({
-    where: {
-      id: Object.values(ProductId[0])[0],
     },
     data: {
       isInPin: isInPin,
