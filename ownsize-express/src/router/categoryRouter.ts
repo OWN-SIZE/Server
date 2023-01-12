@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { categoryController } from "../controller";
-import { auth } from "../middlwares";
+import { auth } from "../middlewares";
 
 const router: Router = Router();
 
