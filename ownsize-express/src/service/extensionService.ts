@@ -11,7 +11,7 @@ const toAllCloset = async (
   size: string,
   isRecommend: boolean,
   faviconUrl: string,
-  userId: number
+  userId: number,
 ) => {
   const data = await prisma.allCloset.create({
     data: {
@@ -23,7 +23,8 @@ const toAllCloset = async (
       size: size,
       isRecommend: isRecommend,
       faviconUrl: faviconUrl,
-    },
+      createdAt: String(Date.now())
+    }
   });
 
   if (isRecommend) {
