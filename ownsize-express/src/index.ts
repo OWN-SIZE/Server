@@ -1,12 +1,9 @@
 // src/index.ts
 import express, { NextFunction, Request, Response } from "express";
 import router from "./router";
-import cors from "cors";
 
 const app = express(); // express 객체 받아옴
-const PORT = 3003; // 사용할 port를 3003번으로 설정
-
-app.use(cors()); //CORS 미들웨어 등록
+const PORT = 3003; // 사용할 port를 3000번으로 설정
 
 app.use(express.json()); // express 에서 request body를 json 으로 받아오겠다.
 
