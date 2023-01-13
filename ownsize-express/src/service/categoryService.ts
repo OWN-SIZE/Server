@@ -129,6 +129,7 @@ const getCategoryById = async (categoryId: number, userId: number) => {
       categoryId: { in: categoryId },
     },
     select: {
+      productId: true,
       isInPin: true,
     },
   });
