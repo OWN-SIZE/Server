@@ -178,7 +178,6 @@ issue tracker: 이슈 번호 (option)
 <div markdown="1">   
 
 ```
-{
 generator client {
   provider = "prisma-client-js"
 }
@@ -189,11 +188,111 @@ datasource db {
 }
 
 model User {
-  id        Int         @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
-  name      String?     @db.VarChar(10)
-  email     String?     @db.VarChar(50)
-  AllCloset AllCloset[]
+  id            Int             @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
+  name          String?         @db.VarChar(10)
+  email         String          @unique @db.VarChar(50)
+  userImage     String?         @db.VarChar(500)
+  token         String?         @db.VarChar(500)
+  AllCloset     AllCloset[]
+  AllSizeBottom AllSizeBottom[]
+  AllSizeTop    AllSizeTop[]
+  Category      Category[]
+  Recommend     Recommend[]
 }
+
+model AllCloset {
+  id                 Int                  @id(map: "Archive_pkey") @unique(map: "Archive_id_key") @default(autoincrement())
+  userId             Int                  @default(autoincrement())
+  image              String?              @db.VarChar(500)
+  productName        String?              @db.VarChar(36)
+  size               String?              @db.VarChar(10)
+  memo               String?              @db.VarChar(50)
+  isRecommend        Boolean?
+  isPin              Boolean              @default(false)
+  mallName           String?              @db.VarChar(50)
+  productUrl         String?              @db.VarChar(500)
+  faviconUrl         String?              @db.VarChar(500)
+  createdAt          String?              @db.VarChar(20)
+  User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_user_id_fk")
+  AllCloset_Category AllCloset_Category[]
+}
+
+model AllSizeBottom {
+  id              Int      @id @unique @default(autoincrement())
+  size            String?  @db.VarChar(10)
+  bottomLength    Int?
+  waist           Int?
+  thigh           Int?
+  rise            Int?
+  hem             Int?
+  isWidthOfBottom Boolean?
+  isManual        Boolean?
+  topOrBottom     Int?
+  manualInputNum  Int?
+  bottomItemId    Int?
+  userId          Int      @default(autoincrement())
+  User            User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allsizebottom_user_id_fk")
+}
+
+model AllSizeTop {
+  id             Int      @id @unique @default(autoincrement())
+  size           String?  @db.VarChar(10)
+  topLength      Int?
+  shoulder       Int?
+  chest          Int?
+  isWidthOfTop   Boolean?
+  isManual       Boolean?
+  topOrBottom    Int?
+  manualInputNum Int?
+  topItemId      Int?
+  userId         Int      @default(autoincrement())
+  User           User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allsizetop_user_id_fk")
+}
+
+model MySize {
+  id              Int      @id @unique @default(autoincrement())
+  userId          Int      @unique @default(autoincrement())
+  topLength       Int?
+  shoulder        Int?
+  chest           Int?
+  isWidthOfTop    Boolean?
+  bottomLength    Int?
+  waist           Int?
+  thigh           Int?
+  rise            Int?
+  hem             Int?
+  isWidthOfBottom Boolean?
+}
+
+model Category {
+  id                 Int                  @id @unique @default(autoincrement())
+  categoryName       String?              @db.VarChar(20)
+  isPinCategory      Boolean?
+  image              String[]             @db.VarChar
+  userId             Int                  @default(autoincrement())
+  AllCloset_Category AllCloset_Category[]
+  User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "category_user_id_fk")
+}
+
+model AllCloset_Category {
+  id         Int       @id @unique @default(autoincrement())
+  productId  Int       @default(autoincrement())
+  categoryId Int       @default(autoincrement())
+  isInPin    Boolean?
+  AllCloset  AllCloset @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_allcloset_id_fk")
+  Category   Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_category_id_fk")
+}
+
+model Recommend {
+  id            Int     @id @unique @default(autoincrement())
+  userId        Int     @default(autoincrement())
+  url           String? @db.VarChar(200)
+  recommendSize String? @db.VarChar(10)
+  topItemId     Int?
+  bottomItemId  Int?
+  User          User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recommend_user_id_fk")
+}
+
 ```
 </div>
 </details>
