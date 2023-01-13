@@ -34,7 +34,10 @@
 <br/>
 
 ### 👥 Contributors
-|김동재| |조하얀|
+|<img src<"https://user-images.githubusercontent.com/87058086/212255576-b3b9bccc-a8e3-453f-9bb9-be9e6ab018f6.jpeg" width="200">|<img src<"https://user-images.githubusercontent.com/87058086/212256100-1c55311a-06f1-4879-82e1-5501e9b10f1f.jpg" width="200">|
+| :-----------------------------------: | :-----------------------------------------------: | 
+|                김동재                 |                      조하얀                       |              
+| [ ehdwoKIM ](https://github.com/ehdwoKIM) | [ yanh2 ](https://github.com/yanh2) |
 
 <br/>
 
