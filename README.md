@@ -1,4 +1,6 @@
 # TEAM OWNSIZE
+![1](https://user-images.githubusercontent.com/87058086/212251691-04f91c31-bdd2-40c0-bea2-32983c35986a.jpg)
+
 🔔 서비스명 : 온사이즈
 
 🔔 서비스 한줄소개 : 사이즈 실측 입력을 바탕으로 온라인 쇼핑몰에서 사이즈를 추천하고 의류 정보 아카이빙을 제공한다
@@ -25,7 +27,6 @@
 
 ### 기능 설명
 
-![1](https://user-images.githubusercontent.com/87058086/212251691-04f91c31-bdd2-40c0-bea2-32983c35986a.jpg)
 ![18](https://user-images.githubusercontent.com/87058086/212251542-20700706-0fba-4136-8ee0-d6681d3af792.jpg)
 ![19](https://user-images.githubusercontent.com/87058086/212251546-83836007-ac36-4bd8-9b63-e51ee3f2dbf9.jpg)
 ![20](https://user-images.githubusercontent.com/87058086/212251550-557f5122-d548-4f49-9503-4643be625248.jpg)
