@@ -16,10 +16,10 @@ const getAllCloset = async (req: Request, res: Response) => {
 
 //* 전체 옷장 내 의류 정보 수정
 const updateCloset = async (req: Request, res: Response) => {
-  const { productName, size, memo, isPin, userId } = req.body;
+  const { productName, size, memo, isPin, isRecommend, userId } = req.body;
   const { productId } = req.params;
 
-  if (!productId && (!productName || !size || !memo || !isPin)) {
+  if (!productId && (! isRecommend || !productName || !size || !memo || !isPin)) {
     return res
       .status(sc.BAD_REQUEST)
       .send(fail(sc.BAD_REQUEST, rm.ALLCLOSET_INFO_ERROR));
@@ -31,7 +31,8 @@ const updateCloset = async (req: Request, res: Response) => {
     productName,
     size,
     memo,
-    isPin
+    isPin,
+    isRecommend
   );
 
   if (!data) {
