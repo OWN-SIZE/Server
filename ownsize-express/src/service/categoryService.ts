@@ -133,10 +133,7 @@ const getCategoryById = async (categoryId: number, userId: number) => {
     },
   });
 
-  const result = {
-    data, IsInPin
-  }
-  console.log(IsInPin)
+  const result = [ data, IsInPin ];
 
   return result;
 };
