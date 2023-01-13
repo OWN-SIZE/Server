@@ -21,6 +21,21 @@
 ### 👥 Contributors
 |김동재| |조하얀|
 
+<br/>
+
+### 기능 설명
+
+![1](https://user-images.githubusercontent.com/87058086/212251691-04f91c31-bdd2-40c0-bea2-32983c35986a.jpg)
+![18](https://user-images.githubusercontent.com/87058086/212251542-20700706-0fba-4136-8ee0-d6681d3af792.jpg)
+![19](https://user-images.githubusercontent.com/87058086/212251546-83836007-ac36-4bd8-9b63-e51ee3f2dbf9.jpg)
+![20](https://user-images.githubusercontent.com/87058086/212251550-557f5122-d548-4f49-9503-4643be625248.jpg)
+![21](https://user-images.githubusercontent.com/87058086/212251551-281b002a-97ae-46dd-b034-58c6dd8a31d2.jpg)
+![22](https://user-images.githubusercontent.com/87058086/212251552-9930de87-3a8e-4c31-9eab-7da7c64fd245.jpg)
+![24](https://user-images.githubusercontent.com/87058086/212251554-542a53f5-a620-4c54-bc12-255426d296f7.jpg)
+![26](https://user-images.githubusercontent.com/87058086/212251324-cbb37ad9-1ba1-4531-be1b-4e87d86204ad.jpg)
+![27](https://user-images.githubusercontent.com/87058086/212251370-440775da-f4ae-48e4-9467-ec79a5ccd10b.jpg)
+![29](https://user-images.githubusercontent.com/87058086/212251400-008115f9-ef46-4dc8-824e-182e85ccca3b.jpg)
+![30](https://user-images.githubusercontent.com/87058086/212251429-f4099461-2968-41e2-b4ef-94a23f29c375.jpg)
 
 <br/>
 
@@ -28,9 +43,7 @@
 |기능명|엔드포인트|담당|구현 진척도|
 | :---: | :---: | :---: | :---: |
 
-|소셜 로그인|[POST] /auth/login|`조하얀`| |
-
-|회원가입|[POST] /auth/register|`조하얀`| |
+|회원가입 및 로그인|[POST] /auth/login|`조하얀`| o |
 
 |전체 옷장 조회|[GET] /allCloset|`김동재`| o |
 
@@ -38,35 +51,41 @@
 
 |전체 옷장 의류 삭제|[DELETE] /allCloset/:productId|`김동재`| o |
 
+|포함된 카테고리 id 조회|[GET] /allCloset/:productId|`김동재`| o |
+
+|카테고리에 의류 추가|[POST] /allCloset/toCategory|`김동재`| o |
+
 |카테고리 전체 조회|[GET] /category|`김동재`| o |
 
-|카테고리 생성|[POST] /category/plusCategory|`김동재`| o |
+|카테고리 생성|[POST] /category/createCategory|`김동재`| o |
 
-|카테고리 삭제|[DELETE] /category/:categoryId|`김동재`| |
+|카테고리 삭제|[DELETE] /category/:categoryId|`김동재`| o |
 
-|카테고리 상세 조회|[GET] /category/:categoryId|`김동재`| |
+|카테고리 수정|[PUT] /category/:categoryId|`김동재`| o |
 
-|카테고리 내 의류 정보 수정|[PUT] /category/:categoryId/:inClothId|`김동재`| |
+|카테고리 상세 조회|[GET] /category/:categoryId|`김동재`| o |
 
-|카테고리 내 의류 삭제|[DELETE] /category/:categoryId/:inClothId|`김동재`| |
+|카테고리 내 의류 핀 고정/해제 |[PUT] /category/:categoryId/:productId|`김동재`| o |
 
-|마이사이즈 조회|[GET] /mysize|'조하얀'| |
+|카테고리 내 의류 삭제|[DELETE] /category/:categoryId/:inClothId|`김동재`| o |
+
+|마이사이즈 조회|[GET] /mysize|'조하얀'| o |
 
 |내 상의 사이즈 정보 입력|[POST] /mysize/topSize|'조하얀'| o |
 
-|내 하의 사이즈 정보 입력|[POST] /mysize/bottomSize|'조하얀'| |
+|내 하의 사이즈 정보 입력|[POST] /mysize/bottomSize|'조하얀'| o |
 
-|마이페이지 조회|[GET] /mypage|'조하얀`| |
+|마이페이지 조회|[GET] /mypage|'조하얀`| o |
 
-|사이즈 추천 기록 조회|[GET] /mypage|`조하얀`| |
+|사이즈 추천 기록 조회|[GET] /mypage/history|`조하얀`| o |
 
-|현재 옷 종류 선택|[PUT] /extension/:userId/topOrBottom|'김동재'| |
+|전체 옷장에 저장|[POST] /extesion/toAllCloset|'김동재'| o |
 
-|사이즈 비교 결과 조회|[GET] /extension/bestSize|'김동재'| |
+|크롤링한 사이즈표 저장|[POST] /extesion/saveCrawling|'김동재'| o |
 
-|전체 옷장에 저장|[POST] /extesion/plusCloset|'김동재'| |
+|사이즈 추천 결과 저장|[POST] /extension/saveBest|'김동재'| o |
 
-|비교 사이즈 수동 입력|[POST] /extension/inputSize|'김동재'| |
+|비교 사이즈 수동 입력|[POST] /extension/inputSize|'김동재'| o |
 
 
 
