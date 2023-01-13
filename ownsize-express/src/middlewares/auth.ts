@@ -8,7 +8,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default async (req: Request, res: Response, next: NextFunction) => {
-  var token = req.header("token");
+  var token = req.header("Authorization");
   if (!token) {
     return res
       .status(sc.UNAUTHORIZED)
