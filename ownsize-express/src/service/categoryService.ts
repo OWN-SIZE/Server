@@ -122,7 +122,23 @@ const getCategoryById = async (categoryId: number, userId: number) => {
     },
   });
 
-  return data;
+  const IsInPin = await prisma.allCloset_Category.findMany({
+    //해당 userId가 가진 전체 product중 해당 categoryId에 해당하는것만 추림
+    where: {
+      productId: { in: productIdArr },
+      categoryId: { in: categoryId },
+    },
+    select: {
+      isInPin: true,
+    },
+  });
+
+  const result = {
+    data, IsInPin
+  }
+  console.log(IsInPin)
+
+  return result;
 };
 
 //* 카테고리 내 의류 핀 고정/해제

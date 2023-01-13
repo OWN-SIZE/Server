@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon",
+    "build": "tsc && node dist",
     "db:pull": "npx prisma db pull",
     "db:push": "npx prisma db push",
     "generate": "npx prisma generate"

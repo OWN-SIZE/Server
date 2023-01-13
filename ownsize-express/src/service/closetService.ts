@@ -19,7 +19,8 @@ const updateCloset = async (
   productName?: string,
   size?: string,
   memo?: string,
-  isPin?: boolean
+  isPin?: boolean,
+  isRecommend?: boolean
 ) => {
   await prisma.allCloset.updateMany({
     where: {
@@ -30,8 +31,10 @@ const updateCloset = async (
       size: size,
       memo: memo,
       isPin: isPin,
+      isRecommend: isRecommend
     },
   });
+
   const data = await prisma.allCloset.findMany({
     where: {
       AND: [{ id: productId }, { userId: userId }],
