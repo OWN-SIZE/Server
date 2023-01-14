@@ -402,24 +402,48 @@ const saveBest = async (
       indexBH = resultBH.indexOf(firBH);
     }
     //해당 인덱스의 사이즈들 중 큰 사이즈 선택
-    const bottomBest = Math.max(
-      Number(BottomSize[indexBL]),
-      Number(BottomSize[indexBW]),
-      Number(BottomSize[indexBT]),
-      Number(BottomSize[indexBR]),
-      Number(BottomSize[indexBH])
-    );
+    if (Number.isInteger(Number(BottomSize[indexBL]))===false) {
+      const bottomBest = Math.max(
+        Number(getKeyByValue(SIZE, BottomSize[indexBL])),
+        Number(getKeyByValue(SIZE, BottomSize[indexBW])),
+        Number(getKeyByValue(SIZE, BottomSize[indexBT])),
+        Number(getKeyByValue(SIZE, BottomSize[indexBR])),
+        Number(getKeyByValue(SIZE, BottomSize[indexBH]))
+      );
 
-    const data = await prisma.recommend.create({
-      data: {
-        userId: userId,
-        url: url,
-        recommendSize: String(bottomBest),
-        bottomItemId: bottomItemId,
-      },
-    });
+      const data = await prisma.recommend.create({
+        data: {
+          userId: userId,
+          url: url,
+          recommendSize: String(bottomBest),
+          bottomItemId: bottomItemId,
+        },
+      });
+  
+      return data;
+    }
+    else if(Number.isInteger(Number(BottomSize[indexBL]))===true) {
+      const bottomKey = Math.max(
+        Number(BottomSize[indexBL]),
+        Number(BottomSize[indexBW]),
+        Number(BottomSize[indexBT]),
+        Number(BottomSize[indexBR]),
+        Number(BottomSize[indexBH])
+      );
 
-    return data;
+      const bottomBest = SIZE[bottomKey];
+
+      const data = await prisma.recommend.create({
+        data: {
+          userId: userId,
+          url: url,
+          recommendSize: bottomBest,
+          bottomItemId: bottomItemId,
+        },
+      });
+  
+      return data;
+    }
   }
 };
 
