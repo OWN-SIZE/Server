@@ -7,7 +7,7 @@ import https from 'https';
 import fs from 'fs';
 
 const app = express(); // express 객체 받아옴
-const PORT = 3003; // 사용할 port를 3000번으로 설정
+const PORT = 80; // 사용할 port를 3000번으로 설정
 const HTTPS_PORT = 8080;
 
 const options = {
