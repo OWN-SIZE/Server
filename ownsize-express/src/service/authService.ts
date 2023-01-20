@@ -29,12 +29,26 @@ const register = async (email: string, name: string) => {
     console.log("user error");
     return null;
   }
+
+  
   //유저 등록 시 해당 유저의 mysize 입력칸 생성
-  await prisma.mySize.create({ 
-    data: {
-      userId: user.id,
+  await prisma.mySize.upsert({ 
+    where: {userId: user.id},
+    update: {userId: user.id},
+    create: {
+      topLength: null,
+      shoulder: null,
+      chest: null,
+      isWidthOfTop: null,
+      bottomLength: null,
+      waist: null,
+      thigh: null,
+      rise: null,
+      hem: null,
+      isWidthOfBottom: null
     }
   })
+
   // 생성된 토큰과 userId를 리턴
   const data = {
     userId: user.id,
