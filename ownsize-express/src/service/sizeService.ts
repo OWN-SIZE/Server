@@ -21,16 +21,11 @@ const inputTopSize = async (
   isWidthOfTop: boolean,
   userId: number
 ) => {
-  // 정보 이미 있으면 update, 없으면 create
-  const data = await prisma.mySize.upsert({
-    where: { userId: userId },
-    update: {
-      topLength: topLength,
-      shoulder: shoulder,
-      chest: chest,
-      isWidthOfTop: isWidthOfTop,
+  const data = await prisma.mySize.update({
+    where: {
+      userId: userId,
     },
-    create: {
+    data: {
       topLength: topLength,
       shoulder: shoulder,
       chest: chest,
@@ -51,17 +46,11 @@ const inputBottomSize = async (
   isWidthOfBottom: boolean,
   userId: number
 ) => {
-  const data = await prisma.mySize.upsert({
-    where: { userId: userId },
-    update: {
-      bottomLength: bottomLength,
-      waist: waist,
-      thigh: thigh,
-      rise: rise,
-      hem: hem,
-      isWidthOfBottom: isWidthOfBottom,
+  const data = await prisma.mySize.update({
+    where:{
+      userId: userId,
     },
-    create: {
+    data: {
       bottomLength: bottomLength,
       waist: waist,
       thigh: thigh,
