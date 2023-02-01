@@ -21,16 +21,29 @@ const inputTopSize = async (
   isWidthOfTop: boolean,
   userId: number
 ) => {
-  const data = await prisma.mySize.update({
+  const data = await prisma.mySize.upsert({
     where: {
       userId: userId,
     },
-    data: {
+    create: {
+      userId: userId,
       topLength: topLength,
       shoulder: shoulder,
       chest: chest,
       isWidthOfTop: isWidthOfTop,
+      bottomLength: null,
+      waist: null,
+      thigh: null,
+      rise: null,
+      hem: null,
+      isWidthOfBottom: null,
     },
+    update: {
+      topLength: topLength,
+      shoulder: shoulder,
+      chest: chest,
+      isWidthOfTop: isWidthOfTop,
+    }
   });
 
   return data;
@@ -46,11 +59,16 @@ const inputBottomSize = async (
   isWidthOfBottom: boolean,
   userId: number
 ) => {
-  const data = await prisma.mySize.update({
-    where:{
+  const data = await prisma.mySize.upsert({
+    where: {
       userId: userId,
     },
-    data: {
+    create: {
+      userId: userId,
+      topLength: null,
+      shoulder: null,
+      chest: null,
+      isWidthOfTop: null,
       bottomLength: bottomLength,
       waist: waist,
       thigh: thigh,
@@ -58,6 +76,14 @@ const inputBottomSize = async (
       hem: hem,
       isWidthOfBottom: isWidthOfBottom,
     },
+    update: {
+      bottomLength: bottomLength,
+      waist: waist,
+      thigh: thigh,
+      rise: rise,
+      hem: hem,
+      isWidthOfBottom: isWidthOfBottom,
+    }
   });
 
   return data;
