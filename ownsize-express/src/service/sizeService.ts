@@ -43,7 +43,7 @@ const inputTopSize = async (
       shoulder: shoulder,
       chest: chest,
       isWidthOfTop: isWidthOfTop,
-    }
+    },
   });
 
   return data;
@@ -83,7 +83,57 @@ const inputBottomSize = async (
       rise: rise,
       hem: hem,
       isWidthOfBottom: isWidthOfBottom,
-    }
+    },
+  });
+
+  return data;
+};
+
+//* 내 상의 사이즈 정보 수정
+const fixTopSize = async (
+  topLength: number,
+  shoulder: number,
+  chest: number,
+  isWidthOfTop: boolean,
+  userId: number
+) => {
+  const data = await prisma.mySize.update({
+    where: {
+      userId: userId,
+    },
+    data: {
+      topLength: topLength,
+      shoulder: shoulder,
+      chest: chest,
+      isWidthOfTop: isWidthOfTop,
+    },
+  });
+
+  return data;
+};
+
+//* 내 하의 사이즈 정보 수정
+const fixBottomSize = async (
+  bottomLength: number,
+  waist: number,
+  thigh: number,
+  rise: number,
+  hem: number,
+  isWidthOfBottom: boolean,
+  userId: number
+) => {
+  const data = await prisma.mySize.update({
+    where: {
+      userId: userId,
+    },
+    data: {
+      bottomLength: bottomLength,
+      waist: waist,
+      thigh: thigh,
+      rise: rise,
+      hem: hem,
+      isWidthOfBottom: isWidthOfBottom,
+    },
   });
 
   return data;
@@ -93,6 +143,8 @@ const sizeService = {
   getMySize,
   inputTopSize,
   inputBottomSize,
+  fixTopSize,
+  fixBottomSize,
 };
 
 export default sizeService;
