@@ -40,13 +40,13 @@ model AllCloset {
 model AllSizeBottom {
   id              Int      @id @unique @default(autoincrement())
   size            String?  @db.VarChar(10)
-  bottomLength    Int?
-  waist           Int?
-  thigh           Int?
-  rise            Int?
-  hem             Int?
+  bottomLength    Float?
+  waist           Float?
+  thigh           Float?
+  rise            Float?
+  hem             Float?
   isWidthOfBottom Boolean?
-  isManual        Boolean?
+  isManual        Boolean? @default(false)
   topOrBottom     Int?
   manualInputNum  Int?
   bottomItemId    Int?
@@ -57,11 +57,11 @@ model AllSizeBottom {
 model AllSizeTop {
   id             Int      @id @unique @default(autoincrement())
   size           String?  @db.VarChar(10)
-  topLength      Int?
-  shoulder       Int?
-  chest          Int?
+  topLength      Float?
+  shoulder       Float?
+  chest          Float?
   isWidthOfTop   Boolean?
-  isManual       Boolean?
+  isManual       Boolean? @default(false)
   topOrBottom    Int?
   manualInputNum Int?
   topItemId      Int?
@@ -98,7 +98,7 @@ model AllCloset_Category {
   id         Int       @id @unique @default(autoincrement())
   productId  Int       @default(autoincrement())
   categoryId Int       @default(autoincrement())
-  isInPin    Boolean?
+  isInPin    Boolean?  @default(false)
   AllCloset  AllCloset @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_allcloset_id_fk")
   Category   Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_category_id_fk")
 }

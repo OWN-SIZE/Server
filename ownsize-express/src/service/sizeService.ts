@@ -21,11 +21,24 @@ const inputTopSize = async (
   isWidthOfTop: boolean,
   userId: number
 ) => {
-  const data = await prisma.mySize.update({
+  const data = await prisma.mySize.upsert({
     where: {
       userId: userId,
     },
-    data: {
+    create: {
+      userId: userId,
+      topLength: topLength,
+      shoulder: shoulder,
+      chest: chest,
+      isWidthOfTop: isWidthOfTop,
+      bottomLength: null,
+      waist: null,
+      thigh: null,
+      rise: null,
+      hem: null,
+      isWidthOfBottom: null,
+    },
+    update: {
       topLength: topLength,
       shoulder: shoulder,
       chest: chest,
@@ -46,8 +59,71 @@ const inputBottomSize = async (
   isWidthOfBottom: boolean,
   userId: number
 ) => {
+  const data = await prisma.mySize.upsert({
+    where: {
+      userId: userId,
+    },
+    create: {
+      userId: userId,
+      topLength: null,
+      shoulder: null,
+      chest: null,
+      isWidthOfTop: null,
+      bottomLength: bottomLength,
+      waist: waist,
+      thigh: thigh,
+      rise: rise,
+      hem: hem,
+      isWidthOfBottom: isWidthOfBottom,
+    },
+    update: {
+      bottomLength: bottomLength,
+      waist: waist,
+      thigh: thigh,
+      rise: rise,
+      hem: hem,
+      isWidthOfBottom: isWidthOfBottom,
+    },
+  });
+
+  return data;
+};
+
+//* 내 상의 사이즈 정보 수정
+const fixTopSize = async (
+  topLength: number,
+  shoulder: number,
+  chest: number,
+  isWidthOfTop: boolean,
+  userId: number
+) => {
   const data = await prisma.mySize.update({
-    where:{
+    where: {
+      userId: userId,
+    },
+    data: {
+      topLength: topLength,
+      shoulder: shoulder,
+      chest: chest,
+      isWidthOfTop: isWidthOfTop,
+    },
+  });
+
+  return data;
+};
+
+//* 내 하의 사이즈 정보 수정
+const fixBottomSize = async (
+  bottomLength: number,
+  waist: number,
+  thigh: number,
+  rise: number,
+  hem: number,
+  isWidthOfBottom: boolean,
+  userId: number
+) => {
+  const data = await prisma.mySize.update({
+    where: {
       userId: userId,
     },
     data: {
@@ -67,6 +143,8 @@ const sizeService = {
   getMySize,
   inputTopSize,
   inputBottomSize,
+  fixTopSize,
+  fixBottomSize,
 };
 
 export default sizeService;

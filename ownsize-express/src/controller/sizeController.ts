@@ -59,10 +59,59 @@ const inputBottomSize = async (req: Request, res: Response) => {
     .send(success(sc.CREATED, rm.INSERT_MYBOTTOMSIZE_SUCCESS, data));
 };
 
+//* 내 상의 사이즈 정보 수정
+const fixTopSize = async (req: Request, res: Response) => {
+  const { topLength, shoulder, chest, isWidthOfTop, userId } = req.body;
+
+  const data = await sizeService.fixTopSize(
+    +topLength,
+    +shoulder,
+    +chest,
+    isWidthOfTop,
+    +userId
+  );
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.UPDATE_MYTOPSIZE_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.UPDATE_MYTOPSIZE_SUCCESS, data));
+};
+
+//* 내 하의 사이즈 정보 수정
+const fixBottomSize = async (req: Request, res: Response) => {
+  const { bottomLength, waist, thigh, rise, hem, isWidthOfBottom, userId } =
+    req.body;
+
+  const data = await sizeService.fixBottomSize(
+    +bottomLength,
+    +waist,
+    +thigh,
+    +rise,
+    +hem,
+    isWidthOfBottom,
+    +userId
+  );
+
+  if (!data) {
+    return res
+      .status(sc.NOT_FOUND)
+      .send(fail(sc.NOT_FOUND, rm.UPDATE_MYBOTTOMSIZE_FAIL));
+  }
+  return res
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.UPDATE_MYBOTTOMSIZE_SUCCESS, data));
+};
+
 const sizeController = {
   getMySize,
   inputTopSize,
   inputBottomSize,
+  fixTopSize,
+  fixBottomSize,
 };
 
 export default sizeController;

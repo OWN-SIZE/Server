@@ -63,6 +63,10 @@ export default {
   INSERT_MYTOPSIZE_FAIL: "내 상의 사이즈 정보 입력 실패",
   INSERT_MYBOTTOMSIZE_SUCCESS: "내 하의 사이즈 정보 입력 성공",
   INSERT_MYBOTTOMSIZE_FAIL: "내 하의 사이즈 정보 입력 실패",
+  UPDATE_MYTOPSIZE_SUCCESS: "내 상의 사이즈 정보 수정 성공",
+  UPDATE_MYTOPSIZE_FAIL: "내 상의 사이즈 정보 수정 실패",
+  UPDATE_MYBOTTOMSIZE_SUCCESS: "내 하의 사이즈 정보 수정 성공",
+  UPDATE_MYBOTTOMSIZE_FAIL: "내 하의 사이즈 정보 수정 실패",
 
   // 마이페이지
   READ_MYPAGE_SUCCESS: "마이페이지 조회 성공",
