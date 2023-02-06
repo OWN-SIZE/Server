@@ -13,6 +13,7 @@ model User {
   email         String          @unique @db.VarChar(50)
   userImage     String?         @db.VarChar(500)
   token         String?         @db.VarChar(500)
+  isUser        Boolean?        @default(true)
   AllCloset     AllCloset[]
   AllSizeBottom AllSizeBottom[]
   AllSizeTop    AllSizeTop[]
