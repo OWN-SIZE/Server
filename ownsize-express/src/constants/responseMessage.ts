@@ -19,6 +19,12 @@ export default {
   DELETE_USER_FAIL: "유저 탈퇴 실패",
   NO_USER: "탈퇴했거나 가입하지 않은 유저입니다.",
 
+  SAVE_EMAIL_SUCCESS: "이메일 수집 성공",
+  SAVE_EMAIL_FAIL: "이메일 수집 실패",
+
+  READ_SAVED_EMAIL_SUCCESS: "수집한 이메일 조회 성공",
+  READ_SAVED_EMAIL_FAIL: "수집한 이메일 조회 실패",
+
   // 토큰
   CREATE_TOKEN_SUCCESS: "토큰 재발급 성공",
   EXPIRED_TOKEN: "토큰이 만료되었습니다.",
