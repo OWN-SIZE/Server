@@ -63,4 +63,7 @@ const pageService = {
   getRecCount,
 };
 
+module.exports = {
+  getMyPage: getMyPage,
+};
 export default pageService;
