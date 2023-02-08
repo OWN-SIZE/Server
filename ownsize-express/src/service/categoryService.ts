@@ -134,7 +134,16 @@ const getCategoryById = async (categoryId: number, userId: number) => {
     },
   });
 
-  const result = [ data, IsInPin ];
+  const CategoryName = await prisma.category.findUnique({
+    where: {
+      id: categoryId
+    },
+    select: {
+      categoryName: true
+    }
+  });
+
+  const result = [ data, IsInPin, CategoryName ];
 
   return result;
 };
