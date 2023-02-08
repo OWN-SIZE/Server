@@ -17,11 +17,11 @@ const inputTopSize = async (req: Request, res: Response) => {
   const { topLength, shoulder, chest, isWidthOfTop, userId } = req.body;
 
   const data = await sizeService.inputTopSize(
-    +topLength,
-    +shoulder,
-    +chest,
+    parseFloat(topLength),
+    parseFloat(shoulder),
+    parseFloat(chest),
     isWidthOfTop,
-    +userId
+    parseFloat(userId)
   );
 
   if (!data) {
@@ -40,13 +40,13 @@ const inputBottomSize = async (req: Request, res: Response) => {
     req.body;
 
   const data = await sizeService.inputBottomSize(
-    +bottomLength,
-    +waist,
-    +thigh,
-    +rise,
-    +hem,
+    parseFloat(bottomLength),
+    parseFloat(waist),
+    parseFloat(thigh),
+    parseFloat(rise),
+    parseFloat(hem),
     isWidthOfBottom,
-    +userId
+    parseFloat(userId)
   );
 
   if (!data) {
@@ -64,11 +64,11 @@ const fixTopSize = async (req: Request, res: Response) => {
   const { topLength, shoulder, chest, isWidthOfTop, userId } = req.body;
 
   const data = await sizeService.fixTopSize(
-    +topLength,
-    +shoulder,
-    +chest,
+    parseFloat(topLength),
+    parseFloat(shoulder),
+    parseFloat(chest),
     isWidthOfTop,
-    +userId
+    parseFloat(userId)
   );
 
   if (!data) {
@@ -87,13 +87,13 @@ const fixBottomSize = async (req: Request, res: Response) => {
     req.body;
 
   const data = await sizeService.fixBottomSize(
-    +bottomLength,
-    +waist,
-    +thigh,
-    +rise,
-    +hem,
+    parseFloat(bottomLength),
+    parseFloat(waist),
+    parseFloat(thigh),
+    parseFloat(rise),
+    parseFloat(hem),
     isWidthOfBottom,
-    +userId
+    parseFloat(userId)
   );
 
   if (!data) {
