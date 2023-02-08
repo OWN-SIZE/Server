@@ -12,8 +12,9 @@ model User {
   name          String?         @db.VarChar(10)
   email         String          @unique @db.VarChar(50)
   userImage     String?         @db.VarChar(500)
-  token         String?         @db.VarChar(500)
+  token         String?         @unique @db.VarChar(500)
   isUser        Boolean?        @default(true)
+  accessToken   String?         @db.VarChar(500)
   AllCloset     AllCloset[]
   AllSizeBottom AllSizeBottom[]
   AllSizeTop    AllSizeTop[]
@@ -73,15 +74,15 @@ model AllSizeTop {
 model MySize {
   id              Int      @id @unique @default(autoincrement())
   userId          Int      @unique @default(autoincrement())
-  topLength       Int?
-  shoulder        Int?
-  chest           Int?
+  topLength       Float?
+  shoulder        Float?
+  chest           Float?
   isWidthOfTop    Boolean?
-  bottomLength    Int?
-  waist           Int?
-  thigh           Int?
-  rise            Int?
-  hem             Int?
+  bottomLength    Float?
+  waist           Float?
+  thigh           Float?
+  rise            Float?
+  hem             Float?
   isWidthOfBottom Boolean?
 }
 
