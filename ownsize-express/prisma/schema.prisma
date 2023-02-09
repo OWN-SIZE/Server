@@ -74,15 +74,15 @@ model AllSizeTop {
 model MySize {
   id              Int      @id @unique @default(autoincrement())
   userId          Int      @unique @default(autoincrement())
-  topLength       Int?
-  shoulder        Int?
-  chest           Int?
+  topLength       Float?
+  shoulder        Float?
+  chest           Float?
   isWidthOfTop    Boolean?
-  bottomLength    Int?
-  waist           Int?
-  thigh           Int?
-  rise            Int?
-  hem             Int?
+  bottomLength    Float?
+  waist           Float?
+  thigh           Float?
+  rise            Float?
+  hem             Float?
   isWidthOfBottom Boolean?
 }
 
