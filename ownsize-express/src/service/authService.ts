@@ -40,8 +40,8 @@ const register = async (email: string, name: string) => {
   // 생성된 토큰과 userId를 리턴
   const data = {
     userId: user.id,
-    refreshToken: refreshToken,
-    accessToken: accessToken,
+    //refreshToken: refreshToken,
+    token: accessToken,
   };
   return data;
 };

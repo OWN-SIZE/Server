@@ -83,7 +83,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         }
       );
       req.body.userId = userData.id;
-      req.body.accessToken = newAccessToken;
+      //req.body.accessToken = newAccessToken;
+      res.send({ token: newAccessToken });
       next();
     }
   } else {
@@ -100,7 +101,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         },
       });
       req.body.userId = user.id;
-      req.body.refreshToken = newRefreshToken;
+      //req.body.refreshToken = newRefreshToken;
       next();
     } else {
       // case4: access token과 refresh token 모두가 유효한 경우
