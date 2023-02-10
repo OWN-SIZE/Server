@@ -9,6 +9,8 @@ export default {
   SIGNUP_FAIL: "회원 가입 실패",
   SIGNIN_SUCCESS: "로그인 성공",
   SIGNIN_FAIL: "로그인 실패",
+  LOGOUT_SUCCESS: "로그아웃 성공",
+  LOGOUT_FAIL: "로그아웃 실패",
   ALREADY_NICKNAME: "이미 사용중인 닉네임입니다.",
 
   // 유저

@@ -55,8 +55,70 @@ const register = async (email: string, name: string) => {
   return data;
 };
 
+//* 로그아웃
+const logout = async (userId: number) => {
+  // const user = await prisma.user.findUnique({
+  //   where: { id: userId },
+  // });
+
+  // if (!user) {
+  //   console.log("user error");
+  //   return null;
+  // }
+
+  // refresh token 삭제
+  const tokenDelete = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      token: null,
+    },
+  });
+  //! access token은 어떻게 지우지? 클라에서 응답 받으면 access token 지우는 방식?
+
+  return tokenDelete;
+};
+
+//* 회원 탈퇴
+const deleteUser = async (userId: number) => {
+  await prisma.recommend.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.allSizeTop.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.allSizeBottom.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.allCloset_Category.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.allCloset.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.category.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.mySize.deleteMany({
+    where: { id: userId },
+  });
+
+  const data = await prisma.user.delete({
+    where: { id: userId },
+  });
+
+  return data;
+};
+
 const authService = {
   register,
+  logout,
+  deleteUser,
 };
 
 export default authService;
