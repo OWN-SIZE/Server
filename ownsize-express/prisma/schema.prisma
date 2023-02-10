@@ -14,7 +14,6 @@ model User {
   userImage     String?         @db.VarChar(500)
   token         String?         @unique @db.VarChar(500)
   isUser        Boolean?        @default(true)
-  accessToken   String?         @db.VarChar(500)
   AllCloset     AllCloset[]
   AllSizeBottom AllSizeBottom[]
   AllSizeTop    AllSizeTop[]
@@ -26,7 +25,7 @@ model AllCloset {
   id                 Int                  @id(map: "Archive_pkey") @unique(map: "Archive_id_key") @default(autoincrement())
   userId             Int                  @default(autoincrement())
   image              String?              @db.VarChar(500)
-  productName        String?              @db.VarChar(36)
+  productName        String?              @db.VarChar(100)
   size               String?              @db.VarChar(10)
   memo               String?              @db.VarChar(50)
   isRecommend        Boolean?
