@@ -57,53 +57,32 @@
 
 <br/>
 
-### 💻 Roles
-|기능명|엔드포인트|담당|구현 진척도|
+### 💻 API
+
+| 기능명 | 엔드포인트 | 담당 | 완료 |
 | :---: | :---: | :---: | :---: |
-
-|회원가입 및 로그인|[POST] /auth/login|`조하얀`| o |
-
-|전체 옷장 조회|[GET] /allCloset|`김동재`| o |
-
-|전체 옷장 의류 정보 수정|[PUT] /allCloset/:productId|`김동재`| o |
-
-|전체 옷장 의류 삭제|[DELETE] /allCloset/:productId|`김동재`| o |
-
-|포함된 카테고리 id 조회|[GET] /allCloset/:productId|`김동재`| o |
-
-|카테고리에 의류 추가|[POST] /allCloset/toCategory|`김동재`| o |
-
-|카테고리 전체 조회|[GET] /category|`김동재`| o |
-
-|카테고리 생성|[POST] /category/createCategory|`김동재`| o |
-
-|카테고리 삭제|[DELETE] /category/:categoryId|`김동재`| o |
-
-|카테고리 수정|[PUT] /category/:categoryId|`김동재`| o |
-
-|카테고리 상세 조회|[GET] /category/:categoryId|`김동재`| o |
-
-|카테고리 내 의류 핀 고정/해제 |[PUT] /category/:categoryId/:productId|`김동재`| o |
-
-|카테고리 내 의류 삭제|[DELETE] /category/:categoryId/:inClothId|`김동재`| o |
-
-|마이사이즈 조회|[GET] /mysize|'조하얀'| o |
-
-|내 상의 사이즈 정보 입력|[POST] /mysize/topSize|'조하얀'| o |
-
-|내 하의 사이즈 정보 입력|[POST] /mysize/bottomSize|'조하얀'| o |
-
-|마이페이지 조회|[GET] /mypage|'조하얀`| o |
-
-|사이즈 추천 기록 조회|[GET] /mypage/history|`조하얀`| o |
-
-|전체 옷장에 저장|[POST] /extesion/toAllCloset|'김동재'| o |
-
-|크롤링한 사이즈표 저장|[POST] /extesion/saveCrawling|'김동재'| o |
-
-|사이즈 추천 결과 저장|[POST] /extension/saveBest|'김동재'| o |
-
-|비교 사이즈 수동 입력|[POST] /extension/inputSize|'김동재'| o |
+| 회원가입 및 로그인 | [POST] /auth/login | 조하얀 | ✅ |
+| 전체 옷장 조회 | [GET] /allCloset | 김동재 | ✅ |
+| 전체 옷장 의류 정보 수정 | [PUT] /allCloset/:productId | 김동재 | ✅ |
+| 전체 옷장 의류 삭제 | [DELETE] /allCloset/:productId | 김동재 | ✅ |
+| 포함된 카테고리 id 조회 | [GET] /allCloset/:productId | 김동재 | ✅ |
+| 카테고리에 의류 추가 | [POST] /allCloset/toCategory | 김동재 | ✅ |
+| 카테고리 전체 조회 | [GET] /category | 김동재 | ✅ |
+| 카테고리 생성 | [POST] /category/createCategory | 김동재 | ✅ |
+| 카테고리 삭제 | [DELETE] /category/:categoryId | 김동재 | ✅ |
+| 카테고리 수정 | [PUT] /category/:categoryId | 김동재 | ✅ |
+| 카테고리 상세 조회 | [GET] /category/:categoryId | 김동재 | ✅ |
+| 카테고리 내 의류 핀 고정/해제 | [PUT] /category/:categoryId/:productId | 김동재 | ✅ |
+| 카테고리 내 의류 삭제 | [DELETE] /category/:categoryId/:inClothId | 김동재 | ✅ |
+| 마이사이즈 조회 | [GET] /mysize | 조하얀 | ✅ |
+| 내 상의 사이즈 정보 입력 | [POST] /mysize/topSize | 조하얀 | ✅ |
+| 내 하의 사이즈 정보 입력 | [POST] /mysize/bottomSize | 조하얀 | ✅ |
+| 마이페이지 조회 | [GET] /mypage | 조하얀 | ✅ |
+| 사이즈 추천 기록 조회 | [GET] /mypage/history | 조하얀 | ✅ |
+| 전체 옷장에 저장 | [POST] /extesion/toAllCloset | 김동재 | ✅ |
+| 크롤링한 사이즈표 저장 | [POST] /extesion/saveCrawling | 김동재 | ✅ |
+| 사이즈 추천 결과 저장 | [POST] /extension/saveBest | 김동재 | ✅ |
+| 비교 사이즈 수동 입력 | [POST] /extension/inputSize | 김동재 | ✅ |
 
 
 
