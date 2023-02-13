@@ -7,7 +7,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 //* 회원가입 및 로그인
-const register = async (email: string, name: string) => {
+const register = async (email: string, name: string, picture: string) => {
   const refreshToken = jwt.sign({}, process.env.JWT_SECRET, {
     expiresIn: "14d",
   });
@@ -26,10 +26,11 @@ const register = async (email: string, name: string) => {
   // DB에 없다면 JWT 토큰을 만들어주고 돌려준다.
   const user = await prisma.user.upsert({
     where: { email: email },
-    update: { token: refreshToken }, //있으면 업데이트
+    update: { token: refreshToken, picture: picture }, //있으면 업데이트 (로그인시 구글 프로필 사진 업데이트)
     create: {
       name: name,
       email: email,
+      picture: picture,
       token: refreshToken,
     }, //없으면 만듦
   });
@@ -42,7 +43,6 @@ const register = async (email: string, name: string) => {
   // 생성된 토큰과 userId를 리턴
   const data = {
     userId: user.id,
-    //refreshToken: refreshToken,
     token: accessToken,
   };
   return data;
