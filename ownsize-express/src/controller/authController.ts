@@ -8,9 +8,9 @@ require("dotenv").config();
 
 //* 회원가입 및 로그인
 const register = async (req: Request, res: Response) => {
-  const { email, name } = req.body;
+  const { email, name, picture } = req.body;
 
-  const data = await authService.register(email, name);
+  const data = await authService.register(email, name, picture);
 
   if (!data) {
     //JWT 토큰 안만들어진 경우
