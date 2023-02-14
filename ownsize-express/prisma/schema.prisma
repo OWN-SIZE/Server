@@ -35,6 +35,7 @@ model AllCloset {
   productUrl         String?              @db.VarChar(500)
   faviconUrl         String?              @db.VarChar(500)
   createdAt          String?              @db.VarChar(20)
+  updateAt           String?              @db.VarChar(20)
   User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_user_id_fk")
   AllCloset_Category AllCloset_Category[]
 }
