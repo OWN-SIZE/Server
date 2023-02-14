@@ -274,6 +274,10 @@ const saveBest = async (
       indexTS = resultTS.indexOf(firTS);
     }
 
+    if (indexTS === -1) {
+      indexTS = 0;
+    }
+
     const firTC = resultAbsTC.sort(function (a, b) {
       return a - b;
     })[0];
@@ -286,6 +290,10 @@ const saveBest = async (
       indexTC = resultTC.indexOf(-1 * firTC);
     } else {
       indexTC = resultTC.indexOf(firTC);
+    }
+
+    if (indexTC === -1) {
+      indexTC = 0;
     }
 
     //해당 인덱스의 사이즈들 중 큰 사이즈 선택
@@ -346,6 +354,10 @@ const saveBest = async (
       indexBL = resultBL.indexOf(firBL);
     }
 
+    if (indexBL === -1) {
+      indexBL = 0;
+    }
+
     const firBW = resultAbsBW.sort(function (a, b) {
       return a - b;
     })[0];
@@ -358,6 +370,10 @@ const saveBest = async (
       indexBW = resultBW.indexOf(-1 * firBW);
     } else {
       indexBW = resultBW.indexOf(firBW);
+    }
+
+    if (indexBW === -1) {
+      indexBW = 0;
     }
 
     const firBT = resultAbsBT.sort(function (a, b) {
@@ -374,6 +390,10 @@ const saveBest = async (
       indexBT = resultBT.indexOf(firBT);
     }
 
+    if (indexBT === -1) {
+      indexBT = 0;
+    }
+
     const firBR = resultAbsBR.sort(function (a, b) {
       return a - b;
     })[0];
@@ -388,19 +408,28 @@ const saveBest = async (
       indexBR = resultBR.indexOf(firBR);
     }
 
+    if (indexBR === -1) {
+      indexBR = 0;
+    }
+
     const firBH = resultAbsBH.sort(function (a, b) {
       return a - b;
     })[0];
     const secBH = resultAbsBH.sort(function (a, b) {
       return a - b;
     })[1];
-
+   
     let indexBH = 0;
     if (firBH == secBH) {
       indexBH = resultBH.indexOf(-1 * firBH);
     } else {
       indexBH = resultBH.indexOf(firBH);
     }
+    
+    if (indexBH === -1) {
+      indexBH = 0;
+    }
+
     //해당 인덱스의 사이즈들 중 큰 사이즈 선택
     if (Number.isInteger(Number(BottomSize[indexBL]))===false) {
       const bottomKey = Math.max(
@@ -431,7 +460,7 @@ const saveBest = async (
         Number(BottomSize[indexBT]),
         Number(BottomSize[indexBR]),
         Number(BottomSize[indexBH])
-      );
+      );     
 
       const data = await prisma.recommend.create({
         data: {
