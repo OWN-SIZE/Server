@@ -96,7 +96,7 @@ const updateCategory = async (
       updateCategoryAt: 'desc'
     }
   });
-  
+
   return data;
 };
 
@@ -148,7 +148,11 @@ const getCategoryById = async (categoryId: number, userId: number) => {
     select: {
       productId: true,
       isInPin: true,
+      updateInPinAt: true
     },
+    orderBy: {
+      updateInPinAt: 'desc'
+    }
   });
 
   const CategoryName = await prisma.category.findUnique({
