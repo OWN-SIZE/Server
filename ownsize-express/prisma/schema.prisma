@@ -15,6 +15,7 @@ model User {
   token         String?         @unique @db.VarChar(500)
   isUser        Boolean?        @default(true)
   picture       String?         @db.VarChar(500)
+  isAlreadyUser String?         @db.VarChar(10)
   AllCloset     AllCloset[]
   AllSizeBottom AllSizeBottom[]
   AllSizeTop    AllSizeTop[]
