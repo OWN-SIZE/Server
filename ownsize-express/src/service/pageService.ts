@@ -16,7 +16,7 @@ const getMyPage = async (userId: number) => {
   const data = {
     name: user.name,
     email: user.email,
-    userImage: user.userImage,
+    picture: user.picture,
   };
   return data;
 };

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { authController } from "../controller";
+import { auth } from "../middlewares";
 
 const router: Router = Router();
 
@@ -11,5 +12,8 @@ router.post("/logout", authController.logout);
 
 //* 회원 탈퇴 DELETE /auth
 router.delete("/", authController.deleteUser);
+//* 엑세스 토큰 재발급 GET /auth/token
+
+router.get("/token", auth, authController.newToken);
 
 export default router;

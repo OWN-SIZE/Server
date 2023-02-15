@@ -17,6 +17,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   const decoded = jwtHandler.verify(token); //? jwtHandler에서 만들어둔 verify로 토큰 검사
 
   //? 토큰 에러 분기 처리
+  //401 응답->토큰재발급 API 올것
   if (decoded === tokenType.TOKEN_EXPIRED)
     return res
       .status(sc.UNAUTHORIZED)
@@ -44,8 +45,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     //해당 email이 없는 경우
     return res.status(sc.UNAUTHORIZED).send(fail(sc.UNAUTHORIZED, rm.NO_USER));
   }
-  //console.log("email: ", email);
-  //console.log("userId: ", result.id);
   req.body.userId = result.id;
   next();
 };
