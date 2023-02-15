@@ -26,12 +26,13 @@ const register = async (email: string, name: string, picture: string) => {
   // DB에 없다면 JWT 토큰을 만들어주고 돌려준다.
   const user = await prisma.user.upsert({
     where: { email: email },
-    update: { token: refreshToken, picture: picture }, //있으면 업데이트 (로그인시 구글 프로필 사진 업데이트)
+    update: { token: refreshToken, picture: picture, isAlreadyUser: "pending" }, //있으면 업데이트 (로그인시 구글 프로필 사진 업데이트)
     create: {
       name: name,
       email: email,
       picture: picture,
       token: refreshToken,
+      isAlreadyUser: "first"
     }, //없으면 만듦
   });
 
@@ -40,10 +41,11 @@ const register = async (email: string, name: string, picture: string) => {
     return null;
   }
 
-  // 생성된 토큰과 userId를 리턴
+  // 생성된 토큰과 userId, 유저의 상태를 리턴
   const data = {
     userId: user.id,
     token: accessToken,
+    isAlreadyUser: user.isAlreadyUser
   };
   return data;
 };
