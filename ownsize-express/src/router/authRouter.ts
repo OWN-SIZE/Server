@@ -8,12 +8,12 @@ const router: Router = Router();
 router.post("/", authController.register);
 
 //* 로그아웃 POST /auth/logout
-router.post("/logout", authController.logout);
+router.post("/logout", auth, authController.logout);
 
 //* 회원 탈퇴 DELETE /auth
-router.delete("/", authController.deleteUser);
-//* 엑세스 토큰 재발급 GET /auth/token
+router.delete("/", auth, authController.deleteUser);
 
+//* 엑세스 토큰 재발급 GET /auth/token
 router.get("/token", auth, authController.newToken);
 
 export default router;

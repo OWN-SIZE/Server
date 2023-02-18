@@ -16,7 +16,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   }
   const decoded = jwtHandler.verify(token); //? jwtHandler에서 만들어둔 verify로 토큰 검사
 
+  console.log("decoded결과: ", decoded);
   //? 토큰 에러 분기 처리
+  //! 제대로 안되는것 같음 만료 확인 다시하기
   //401 응답->토큰재발급 API 올것
   if (decoded === tokenType.TOKEN_EXPIRED)
     return res
@@ -27,12 +29,16 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       .status(sc.UNAUTHORIZED)
       .send(fail(sc.UNAUTHORIZED, rm.INVALID_TOKEN));
 
+  console.log("error1");
+
   //? decode한 후 담겨있는 email을 꺼내옴
   const email: string = (decoded as JwtPayload).email;
   if (!email)
     return res
       .status(sc.UNAUTHORIZED)
       .send(fail(sc.UNAUTHORIZED, rm.INVALID_TOKEN));
+
+  console.log("error2");
 
   //? 얻어낸 email 을 Request Body 내 email 필드에 담고, 다음 미들웨어로 넘김( next() )
   const result = await prisma.user.findUnique({

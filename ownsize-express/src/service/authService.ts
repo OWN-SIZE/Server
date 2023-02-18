@@ -21,6 +21,7 @@ const register = async (email: string, name: string, picture: string) => {
       expiresIn: "1h",
     }
   );
+  console.log("accessToken: ", accessToken);
 
   // DB에 저장된 사람이라면 DB에 JWT token만 업데이트를 해주고,
   // DB에 없다면 JWT 토큰을 만들어주고 돌려준다.
@@ -66,7 +67,7 @@ const logout = async (userId: number) => {
       token: null,
     },
   });
-  //! access token은 어떻게 지우지? 클라에서 응답 받으면 access token 지우는 방식?
+  //! 클라에서 응답 받으면 access token 지워야 함
 
   return tokenDelete;
 };
