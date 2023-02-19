@@ -17,6 +17,7 @@ const getMyPage = async (userId: number) => {
     name: user.name,
     email: user.email,
     picture: user.picture,
+    isAlreadyUser: user.isAlreadyUser,
   };
   return data;
 };

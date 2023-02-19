@@ -71,15 +71,32 @@ const updateCategory = async (
   categoryName?: string,
   isPinCategory?: boolean
 ) => {
-  const data = await prisma.category.updateMany({
+  await prisma.category.updateMany({
     where: {
       AND: [{ id: categoryId }, { userId: userId }],
     },
     data: {
       categoryName: categoryName,
       isPinCategory: isPinCategory,
+      updateCategoryAt: String(Date.now())
     },
   });
+
+  const data = await prisma.category.findMany({
+    where: {
+      AND: [{ id: categoryId }, { userId: userId }],
+    },
+    select: {
+      id: true,
+      categoryName: true,
+      isPinCategory: true,
+      updateCategoryAt: true
+    },
+    orderBy: {
+      updateCategoryAt: 'desc'
+    }
+  });
+
   return data;
 };
 
@@ -131,7 +148,11 @@ const getCategoryById = async (categoryId: number, userId: number) => {
     select: {
       productId: true,
       isInPin: true,
+      updateInPinAt: true
     },
+    orderBy: {
+      updateInPinAt: 'desc'
+    }
   });
 
   const CategoryName = await prisma.category.findUnique({
@@ -154,13 +175,27 @@ const pinItem = async (
   productId: number,
   isInPin: boolean
 ) => {
-  const data = await prisma.allCloset_Category.updateMany({
+  await prisma.allCloset_Category.updateMany({
     where: {
       AND: [{ categoryId: categoryId }, { productId: productId }],
     },
     data: {
       isInPin: isInPin,
+      updateInPinAt: String(Date.now())
     },
+  });
+
+  const data = await prisma.allCloset_Category.findMany({
+    where: {
+      AND: [{ categoryId: categoryId }, { productId: productId }],
+    },
+    select: {
+      isInPin: true,
+      updateInPinAt: true
+    },
+    orderBy: {
+      updateInPinAt: 'desc'
+    }
   });
 
   return data;

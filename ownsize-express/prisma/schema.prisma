@@ -15,6 +15,7 @@ model User {
   token         String?         @unique @db.VarChar(500)
   isUser        Boolean?        @default(true)
   picture       String?         @db.VarChar(500)
+  isAlreadyUser String?         @db.VarChar(10)
   AllCloset     AllCloset[]
   AllSizeBottom AllSizeBottom[]
   AllSizeTop    AllSizeTop[]
@@ -35,6 +36,7 @@ model AllCloset {
   productUrl         String?              @db.VarChar(500)
   faviconUrl         String?              @db.VarChar(500)
   createdAt          String?              @db.VarChar(20)
+  updateAt           String?              @db.VarChar(20)
   User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_user_id_fk")
   AllCloset_Category AllCloset_Category[]
 }
@@ -92,17 +94,19 @@ model Category {
   isPinCategory      Boolean?
   image              String[]             @db.VarChar
   userId             Int                  @default(autoincrement())
+  updateCategoryAt   String?              @db.VarChar(20)
   AllCloset_Category AllCloset_Category[]
   User               User                 @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "category_user_id_fk")
 }
 
 model AllCloset_Category {
-  id         Int       @id @unique @default(autoincrement())
-  productId  Int       @default(autoincrement())
-  categoryId Int       @default(autoincrement())
-  isInPin    Boolean?  @default(false)
-  AllCloset  AllCloset @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_allcloset_id_fk")
-  Category   Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_category_id_fk")
+  id            Int       @id @unique @default(autoincrement())
+  productId     Int       @default(autoincrement())
+  categoryId    Int       @default(autoincrement())
+  isInPin       Boolean?  @default(false)
+  updateInPinAt String?   @db.VarChar(20)
+  AllCloset     AllCloset @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_allcloset_id_fk")
+  Category      Category  @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allcloset_category_category_id_fk")
 }
 
 model Recommend {

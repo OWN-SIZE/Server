@@ -32,6 +32,7 @@ const register = async (email: string, name: string, picture: string) => {
       email: email,
       picture: picture,
       token: refreshToken,
+      isAlreadyUser: "pending"
     }, //없으면 만듦
   });
 
@@ -40,10 +41,11 @@ const register = async (email: string, name: string, picture: string) => {
     return null;
   }
 
-  // 생성된 토큰과 userId를 리턴
+  // 생성된 토큰과 userId, 유저의 상태를 리턴
   const data = {
     userId: user.id,
     token: accessToken,
+    isAlreadyUser: user.isAlreadyUser
   };
   return data;
 };

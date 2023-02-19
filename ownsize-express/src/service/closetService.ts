@@ -20,7 +20,7 @@ const updateCloset = async (
   size?: string,
   memo?: string,
   isPin?: boolean,
-  isRecommend?: boolean
+  isRecommend?: boolean,
 ) => {
   await prisma.allCloset.updateMany({
     where: {
@@ -31,7 +31,8 @@ const updateCloset = async (
       size: size,
       memo: memo,
       isPin: isPin,
-      isRecommend: isRecommend
+      isRecommend: isRecommend,
+      updateAt: String(Date.now())
     },
   });
 
@@ -47,8 +48,12 @@ const updateCloset = async (
       mallName: true,
       isRecommend: true,
       isPin: true,
+      updateAt: true
     },
-  });
+    orderBy: {
+      updateAt: 'desc'
+    }
+  }); 
 
   return data;
 };
