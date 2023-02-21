@@ -478,8 +478,6 @@ const saveBest = async (
 
 //* 비교 사이즈 수동 입력
 const inputSize = async (
-  isManual: boolean,
-  manualInputNum: number,
   topOrBottom: number,
   size: string,
 
@@ -501,8 +499,6 @@ const inputSize = async (
     const data = prisma.allSizeTop.createMany({
       data: {
         userId: userId,
-        isManual: isManual,
-        manualInputNum: manualInputNum,
         size: size,
         topLength: topLength,
         shoulder: shoulder,
@@ -515,8 +511,6 @@ const inputSize = async (
     const data = prisma.allSizeBottom.createMany({
       data: {
         userId: userId,
-        isManual: isManual,
-        manualInputNum: manualInputNum,
         size: size,
         bottomLength: bottomLength,
         waist: waist,
