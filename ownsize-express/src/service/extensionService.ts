@@ -44,8 +44,6 @@ const toAllCloset = async (
 const saveCrawling = async (
   sizes: [
     {
-      isManual: boolean,
-      manualInputNum: number,
       topOrBottom: number,
       size: string,
       topItemId: number,
@@ -71,8 +69,6 @@ const saveCrawling = async (
       const data = await prisma.allSizeTop.create({
         data: {
           userId: sizes[i].userId,
-          isManual: sizes[i].isManual,
-          manualInputNum: sizes[i].manualInputNum,
           topOrBottom: sizes[i].topOrBottom,
           size: sizes[i].size,
           topItemId: sizes[i].topItemId,
@@ -88,8 +84,6 @@ const saveCrawling = async (
       const data = await prisma.allSizeBottom.create({
         data: {
           userId: sizes[i].userId,
-          isManual: sizes[i].isManual,
-          manualInputNum: sizes[i].manualInputNum,
           topOrBottom: sizes[i].topOrBottom,
           size: sizes[i].size,
           bottomItemId: sizes[i].bottomItemId,
@@ -155,8 +149,6 @@ const saveBest = async (
       AND: [
         { userId: userId },
         { topItemId: topItemId },
-        { isManual: false },
-        { manualInputNum: null },
         { topOrBottom: topOrBottom },
       ],
     },
@@ -172,8 +164,6 @@ const saveBest = async (
       AND: [
         { userId: userId },
         { bottomItemId: bottomItemId },
-        { isManual: false },
-        { manualInputNum: null },
         { topOrBottom: topOrBottom },
       ],
     },
@@ -478,8 +468,6 @@ const saveBest = async (
 
 //* 비교 사이즈 수동 입력
 const inputSize = async (
-  isManual: boolean,
-  manualInputNum: number,
   topOrBottom: number,
   size: string,
 
@@ -501,8 +489,6 @@ const inputSize = async (
     const data = prisma.allSizeTop.createMany({
       data: {
         userId: userId,
-        isManual: isManual,
-        manualInputNum: manualInputNum,
         size: size,
         topLength: topLength,
         shoulder: shoulder,
@@ -515,8 +501,6 @@ const inputSize = async (
     const data = prisma.allSizeBottom.createMany({
       data: {
         userId: userId,
-        isManual: isManual,
-        manualInputNum: manualInputNum,
         size: size,
         bottomLength: bottomLength,
         waist: waist,
