@@ -50,27 +50,23 @@ model AllSizeBottom {
   rise            Float?
   hem             Float?
   isWidthOfBottom Boolean?
-  isManual        Boolean? @default(false)
   topOrBottom     Int?
-  manualInputNum  Int?
   bottomItemId    Int?
   userId          Int      @default(autoincrement())
   User            User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allsizebottom_user_id_fk")
 }
 
 model AllSizeTop {
-  id             Int      @id @unique @default(autoincrement())
-  size           String?  @db.VarChar(10)
-  topLength      Float?
-  shoulder       Float?
-  chest          Float?
-  isWidthOfTop   Boolean?
-  isManual       Boolean? @default(false)
-  topOrBottom    Int?
-  manualInputNum Int?
-  topItemId      Int?
-  userId         Int      @default(autoincrement())
-  User           User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allsizetop_user_id_fk")
+  id           Int      @id @unique @default(autoincrement())
+  size         String?  @db.VarChar(10)
+  topLength    Float?
+  shoulder     Float?
+  chest        Float?
+  isWidthOfTop Boolean?
+  topOrBottom  Int?
+  topItemId    Int?
+  userId       Int      @default(autoincrement())
+  User         User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allsizetop_user_id_fk")
 }
 
 model MySize {

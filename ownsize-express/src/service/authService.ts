@@ -21,6 +21,7 @@ const register = async (email: string, name: string, picture: string) => {
       expiresIn: "1h",
     }
   );
+  console.log("accessToken: ", accessToken);
 
   // DB에 저장된 사람이라면 DB에 JWT token만 업데이트를 해주고,
   // DB에 없다면 JWT 토큰을 만들어주고 돌려준다.
@@ -47,6 +48,56 @@ const register = async (email: string, name: string, picture: string) => {
     token: accessToken,
     isAlreadyUser: user.isAlreadyUser
   };
+  return data;
+};
+
+//* 로그아웃
+const logout = async (userId: number) => {
+  // refresh token 삭제
+  const tokenDelete = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      token: null,
+    },
+  });
+  //! 클라에서 응답 받으면 access token 지우고 리프레시
+  return tokenDelete;
+};
+
+//* 회원 탈퇴
+const deleteUser = async (userId: number) => {
+  await prisma.recommend.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.allSizeTop.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.allSizeBottom.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.allCloset_Category.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.allCloset.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.category.deleteMany({
+    where: { id: userId },
+  });
+
+  await prisma.mySize.deleteMany({
+    where: { id: userId },
+  });
+
+  const data = await prisma.user.delete({
+    where: { id: userId },
+  });
+
   return data;
 };
 
@@ -91,6 +142,8 @@ const newToken = async (userId: number) => {
 
 const authService = {
   register,
+  logout,
+  deleteUser,
   newToken,
 };
 
