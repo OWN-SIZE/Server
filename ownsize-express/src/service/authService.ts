@@ -51,15 +51,6 @@ const register = async (email: string, name: string, picture: string) => {
 
 //* 로그아웃
 const logout = async (userId: number) => {
-  // const user = await prisma.user.findUnique({
-  //   where: { id: userId },
-  // });
-
-  // if (!user) {
-  //   console.log("user error");
-  //   return null;
-  // }
-
   // refresh token 삭제
   const tokenDelete = await prisma.user.update({
     where: { id: userId },
@@ -67,8 +58,7 @@ const logout = async (userId: number) => {
       token: null,
     },
   });
-  //! 클라에서 응답 받으면 access token 지워야 함
-
+  //! 클라에서 응답 받으면 access token 지우고 리프레시
   return tokenDelete;
 };
 
