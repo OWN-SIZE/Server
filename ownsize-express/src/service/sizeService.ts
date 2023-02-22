@@ -19,8 +19,18 @@ const inputTopSize = async (
   shoulder: number,
   chest: number,
   isWidthOfTop: boolean,
-  userId: number
+  userId: number,
+  isAlreadyUser: string
 ) => {
+  await prisma.user.update({
+    where: {
+      id: userId
+    },
+    data: {
+      isAlreadyUser: isAlreadyUser
+    }
+  })
+
   const data = await prisma.mySize.upsert({
     where: {
       userId: userId,
@@ -57,8 +67,18 @@ const inputBottomSize = async (
   rise: number,
   hem: number,
   isWidthOfBottom: boolean,
-  userId: number
+  userId: number,
+  isAlreadyUser: string
 ) => {
+  await prisma.user.update({
+    where: {
+      id: userId
+    },
+    data: {
+      isAlreadyUser: isAlreadyUser
+    }
+  })
+
   const data = await prisma.mySize.upsert({
     where: {
       userId: userId,
@@ -95,7 +115,7 @@ const fixTopSize = async (
   shoulder: number,
   chest: number,
   isWidthOfTop: boolean,
-  userId: number
+  userId: number,
 ) => {
   const data = await prisma.mySize.update({
     where: {
@@ -120,7 +140,7 @@ const fixBottomSize = async (
   rise: number,
   hem: number,
   isWidthOfBottom: boolean,
-  userId: number
+  userId: number,
 ) => {
   const data = await prisma.mySize.update({
     where: {

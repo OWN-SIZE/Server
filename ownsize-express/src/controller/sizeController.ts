@@ -14,14 +14,15 @@ const getMySize = async (req: Request, res: Response) => {
 
 //* 내 상의 사이즈 정보 입력
 const inputTopSize = async (req: Request, res: Response) => {
-  const { topLength, shoulder, chest, isWidthOfTop, userId } = req.body;
+  const { topLength, shoulder, chest, isWidthOfTop, userId, isAlreadyUser } = req.body;
 
   const data = await sizeService.inputTopSize(
     parseFloat(topLength),
     parseFloat(shoulder),
     parseFloat(chest),
     isWidthOfTop,
-    parseFloat(userId)
+    parseFloat(userId),
+    isAlreadyUser
   );
 
   if (!data) {
@@ -36,7 +37,7 @@ const inputTopSize = async (req: Request, res: Response) => {
 
 //* 내 하의 사이즈 정보 입력
 const inputBottomSize = async (req: Request, res: Response) => {
-  const { bottomLength, waist, thigh, rise, hem, isWidthOfBottom, userId } =
+  const { bottomLength, waist, thigh, rise, hem, isWidthOfBottom, userId, isAlreadyUser } =
     req.body;
 
   const data = await sizeService.inputBottomSize(
@@ -46,7 +47,8 @@ const inputBottomSize = async (req: Request, res: Response) => {
     parseFloat(rise),
     parseFloat(hem),
     isWidthOfBottom,
-    parseFloat(userId)
+    parseFloat(userId),
+    isAlreadyUser
   );
 
   if (!data) {

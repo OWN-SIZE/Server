@@ -85,8 +85,6 @@ const saveBest = async (req: Request, res: Response) => {
 //* 비교 사이즈 수동 입력
 const inputSize = async (req: Request, res: Response) => {
   const {
-    isManual,
-    manualInputNum,
     topOrBottom,
     size,
     topLength,
@@ -103,8 +101,6 @@ const inputSize = async (req: Request, res: Response) => {
   } = req.body;
 
   const data = await extensionService.inputSize(
-    isManual,
-    manualInputNum,
     topOrBottom,
     size,
     topLength,
