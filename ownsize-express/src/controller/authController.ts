@@ -3,7 +3,6 @@ import { authService } from "../service";
 import { rm, sc } from "../constants";
 import { success, fail } from "../constants/response";
 
-//const { OAuth2Client } = require("google-auth-library");
 require("dotenv").config();
 
 //* 회원가입 및 로그인
