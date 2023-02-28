@@ -8,9 +8,7 @@ const jwt = require("jsonwebtoken");
 
 //* 회원가입 및 로그인
 const register = async (email: string, name: string, picture: string) => {
-  const refreshToken = jwt.sign({}, process.env.JWT_SECRET, {
-    expiresIn: "14d",
-  });
+  const refreshToken = jwt.sign({}, process.env.JWT_SECRET); //유효기간 없이 만듦
 
   const accessToken = jwt.sign(
     {
@@ -21,7 +19,6 @@ const register = async (email: string, name: string, picture: string) => {
       expiresIn: "1h",
     }
   );
-  console.log("accessToken: ", accessToken);
 
   // DB에 저장된 사람이라면 DB에 JWT token만 업데이트를 해주고,
   // DB에 없다면 JWT 토큰을 만들어주고 돌려준다.
