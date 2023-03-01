@@ -69,9 +69,9 @@ const saveCrawling = async (
       const data = await prisma.allSizeTop.create({
         data: {
           userId: sizes[i].userId,
+          topItemId: sizes[i].topItemId,
           topOrBottom: sizes[i].topOrBottom,
           size: sizes[i].size,
-          topItemId: sizes[i].topItemId,
           topLength: sizes[i].topLength,
           shoulder: sizes[i].shoulder,
           chest: sizes[i].chest,
@@ -84,9 +84,9 @@ const saveCrawling = async (
       const data = await prisma.allSizeBottom.create({
         data: {
           userId: sizes[i].userId,
+          bottomItemId: sizes[i].bottomItemId,
           topOrBottom: sizes[i].topOrBottom,
           size: sizes[i].size,
-          bottomItemId: sizes[i].bottomItemId,
           bottomLength: sizes[i].bottomLength,
           waist: sizes[i].waist,
           thigh: sizes[i].thigh,
@@ -303,7 +303,14 @@ const saveBest = async (
       },
     });
 
+    await prisma.allSizeTop.deleteMany({
+      where: {
+        topItemId: topItemId,
+      }
+    })
+
     return data;
+
   } else if (topOrBottom === 1) {
     //편차절대값 배열 만들기
     for (var i = 0; i < BottomLength.length; i++) {
@@ -441,6 +448,12 @@ const saveBest = async (
         },
       });
 
+      await prisma.allSizeBottom.deleteMany({
+        where: {
+          bottomItemId: bottomItemId,
+        }
+      })
+
       return data;
     }
     else if(Number.isInteger(Number(BottomSize[indexBL]))===true) {
@@ -461,6 +474,12 @@ const saveBest = async (
         },
       });
   
+      await prisma.allSizeBottom.deleteMany({
+        where: {
+          bottomItemId: bottomItemId
+        }
+      })
+
       return data;
     }
   }
