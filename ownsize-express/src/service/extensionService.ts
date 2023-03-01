@@ -305,6 +305,7 @@ const saveBest = async (
 
     await prisma.allSizeTop.deleteMany({
       where: {
+        userId: userId,
         topItemId: topItemId,
       }
     })
@@ -450,6 +451,7 @@ const saveBest = async (
 
       await prisma.allSizeBottom.deleteMany({
         where: {
+          userId: userId,
           bottomItemId: bottomItemId,
         }
       })
@@ -476,6 +478,7 @@ const saveBest = async (
   
       await prisma.allSizeBottom.deleteMany({
         where: {
+          userId: userId,
           bottomItemId: bottomItemId
         }
       })
