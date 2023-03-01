@@ -8,9 +8,7 @@ const jwt = require("jsonwebtoken");
 
 //* 회원가입 및 로그인
 const register = async (email: string, name: string, picture: string) => {
-  const refreshToken = jwt.sign({}, process.env.JWT_SECRET, {
-    expiresIn: "14d",
-  });
+  const refreshToken = jwt.sign({}, process.env.JWT_SECRET); //유효기간 없이 만듦
 
   const accessToken = jwt.sign(
     {
@@ -32,7 +30,7 @@ const register = async (email: string, name: string, picture: string) => {
       email: email,
       picture: picture,
       token: refreshToken,
-      isAlreadyUser: "pending"
+      isAlreadyUser: "pending",
     }, //없으면 만듦
   });
 
@@ -45,8 +43,72 @@ const register = async (email: string, name: string, picture: string) => {
   const data = {
     userId: user.id,
     token: accessToken,
-    isAlreadyUser: user.isAlreadyUser
+    isAlreadyUser: user.isAlreadyUser,
   };
+  return data;
+};
+
+//* 로그아웃
+const logout = async (userId: number) => {
+  // refresh token 삭제
+  const tokenDelete = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      token: null,
+    },
+  });
+  //! 클라에서 응답 받으면 access token 지우고 리프레시
+  return tokenDelete;
+};
+
+//* 회원 탈퇴
+const deleteUser = async (userId: number) => {
+  await prisma.recommend.deleteMany({
+    where: { userId: userId },
+  });
+
+  await prisma.allSizeTop.deleteMany({
+    where: { userId: userId },
+  });
+
+  await prisma.allSizeBottom.deleteMany({
+    where: { userId: userId },
+  });
+
+  //? allCloset_Category 지우는 과정
+  const userData = await prisma.allCloset.findMany({
+    where: { userId: userId },
+    select: {
+      id: true,
+    },
+  });
+  const productIdArr = [];
+  for (var i = 0; i < userData.length; i++) {
+    productIdArr.push(Object.values(userData[i])[0]);
+  }
+  // productId는 중복없으므로 저걸로 찾아도 됨
+  for (var i = 0; i < productIdArr.length; i++) {
+    await prisma.allCloset_Category.deleteMany({
+      where: { productId: productIdArr[i] },
+    });
+  }
+
+  await prisma.allCloset.deleteMany({
+    where: { userId: userId },
+  });
+
+  await prisma.category.deleteMany({
+    where: { userId: userId },
+  });
+
+  await prisma.mySize.deleteMany({
+    where: { userId: userId },
+  });
+
+  const data = await prisma.user.delete({
+    where: { id: userId },
+  });
+
   return data;
 };
 
@@ -91,6 +153,8 @@ const newToken = async (userId: number) => {
 
 const authService = {
   register,
+  logout,
+  deleteUser,
   newToken,
 };
 
