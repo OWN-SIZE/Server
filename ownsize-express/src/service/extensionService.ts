@@ -286,32 +286,58 @@ const saveBest = async (
       indexTC = 0;
     }
 
-    //해당 인덱스의 사이즈들 중 큰 사이즈 선택
-    const resultKey = Math.max(
-      Number(getKeyByValue(SIZE, TopSize[indexTS])),
-      Number(getKeyByValue(SIZE, TopSize[indexTC]))
-    );
 
-    const topBest = SIZE[resultKey];
+    if(Number.isInteger(Number(TopSize[indexTS]))===true) {
+      const topBest = Math.max(
+        Number(TopSize[indexTS]),
+        Number(TopSize[indexTC]),
+      );     
 
-    const data = await prisma.recommend.create({
-      data: {
-        userId: userId,
-        url: url,
-        recommendSize: topBest,
-        topItemId: topItemId,
-      },
-    });
+      const data = await prisma.recommend.create({
+        data: {
+          userId: userId,
+          url: url,
+          recommendSize: String(topBest),
+          topItemId: topItemId,
+        },
+      });
 
-    await prisma.allSizeTop.deleteMany({
-      where: {
-        userId: userId,
-        topItemId: topItemId,
-      }
-    })
+      await prisma.allSizeTop.deleteMany({
+        where: {
+          userId: userId,
+          topItemId: topItemId,
+        }
+      })
 
-    return data;
+      return data;
+    }
+    else if(Number.isInteger(Number(TopSize[indexTS]))===false) {
+      //해당 인덱스의 사이즈들 중 큰 사이즈 선택
+      const resultKey = Math.max(
+        Number(getKeyByValue(SIZE, TopSize[indexTS])),
+        Number(getKeyByValue(SIZE, TopSize[indexTC]))
+      );
 
+      const topBest = SIZE[resultKey];
+
+      const data = await prisma.recommend.create({
+        data: {
+          userId: userId,
+          url: url,
+          recommendSize: topBest,
+          topItemId: topItemId,
+        },
+      });
+
+      await prisma.allSizeTop.deleteMany({
+        where: {
+          userId: userId,
+          topItemId: topItemId,
+        }
+      })
+
+      return data;
+    }
   } else if (topOrBottom === 1) {
     //편차절대값 배열 만들기
     for (var i = 0; i < BottomLength.length; i++) {
