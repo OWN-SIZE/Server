@@ -223,13 +223,15 @@ const saveBest = async (
   const resultAbsBH = []; //밑단 절대값
 
   const SIZE: { [key: string]: any } = {
-    1: "XXS",
-    2: "XS",
-    3: "S",
-    4: "M",
-    5: "L",
-    6: "XL",
-    7: "XXL",
+    1: "3XS",
+    2: "2XS",
+    3: "XS",
+    4: "S",
+    5: "M",
+    6: "L",
+    7: "XL",
+    8: "2XL",
+    9: "3XL"
   };
   //value값으로 key값 탐색
   function getKeyByValue(object: { [x: string]: any }, value: any) {
